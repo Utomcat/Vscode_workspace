@@ -19,7 +19,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ObjectHandler {
 
-
     /**
      * 强制类型转换方法
      *
@@ -31,7 +30,6 @@ public class ObjectHandler {
     public static <T> T cast(Object obj) {
         return (T) obj;
     }
-
 
     /**
      * 根据对应的类型Class对象,将对应的Object对象实例转换成对应的类型,该方法只能用于非集合类型的转换
@@ -48,7 +46,6 @@ public class ObjectHandler {
         }
         return null;
     }
-
 
     /**
      * 验证对象是否为空静态方法
@@ -95,7 +92,6 @@ public class ObjectHandler {
         return false;
     }
 
-
     /**
      * 执行对应的指定对象的指定方法,目前仅支持 set/get 方法
      *
@@ -129,11 +125,12 @@ public class ObjectHandler {
         }
     }
 
-
     /**
      * 获取对应属性的getter或者setter方法名,使用此方法需注意: 对应的属性名的定义不能为 is开头
      *
-     * @param property 需要获取对应getter或setter方法名的属性名
+     * @param property 需要获取对应getter或setter方法名的属性名,属性名必须是和get方法中去掉get后第一个字母小写的格式一样,
+     *                 如: sex 对应的get方法应该是 getSex() ;userName 对应的get 方法应该是
+     *                 getUserName();
      * @param key      获取set/get方法key
      * @return 返回对应属性的get或set方法名
      */
@@ -151,7 +148,6 @@ public class ObjectHandler {
         return sb.toString();
     }
 
-
     /**
      * 利用反射执指定对象指定属性的get方法
      * 
@@ -162,10 +158,13 @@ public class ObjectHandler {
      */
     public static Object invokeGetMethod(Class<? extends Personel> clazz, Object o, String property) {
         try {
-            
-            Method method = clazz.getDeclaredMethod(getSetterOrGetterMethodName(property, MethodNameEnum.GET_METHOD.getValue()), (Class<?>[]) new Class[0]);
+
+            Method method = clazz.getDeclaredMethod(
+                    getSetterOrGetterMethodName(property, MethodNameEnum.GET_METHOD.getValue()),
+                    (Class<?>[]) new Class[0]);
             return method.invoke(o);
-        } catch (NullPointerException | NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+        } catch (NullPointerException | NoSuchMethodException | SecurityException | IllegalAccessException
+                | IllegalArgumentException | InvocationTargetException e) {
             throw new RuntimeException("执行指定对象的指定属性 " + property + " 的 get 方法出错,错误信息为: " + e.getMessage() + " 错误异常行号为: "
                     + e.getStackTrace()[0].getLineNumber());
         }
