@@ -1,0 +1,16 @@
+E:\Work\VcCodeWorkSpace\c#\VSCode_C#_01\bin\Debug\net5.0\VSCode_C#_01.exe
+E:\Work\VcCodeWorkSpace\c#\VSCode_C#_01\bin\Debug\net5.0\VSCode_C#_01.deps.json
+E:\Work\VcCodeWorkSpace\c#\VSCode_C#_01\bin\Debug\net5.0\VSCode_C#_01.runtimeconfig.json
+E:\Work\VcCodeWorkSpace\c#\VSCode_C#_01\bin\Debug\net5.0\VSCode_C#_01.runtimeconfig.dev.json
+E:\Work\VcCodeWorkSpace\c#\VSCode_C#_01\bin\Debug\net5.0\VSCode_C#_01.dll
+E:\Work\VcCodeWorkSpace\c#\VSCode_C#_01\bin\Debug\net5.0\ref\VSCode_C#_01.dll
+E:\Work\VcCodeWorkSpace\c#\VSCode_C#_01\bin\Debug\net5.0\VSCode_C#_01.pdb
+E:\Work\VcCodeWorkSpace\c#\VSCode_C#_01\obj\Debug\net5.0\VSCode_C#_01.csprojAssemblyReference.cache
+E:\Work\VcCodeWorkSpace\c#\VSCode_C#_01\obj\Debug\net5.0\VSCode_C#_01.GeneratedMSBuildEditorConfig.editorconfig
+E:\Work\VcCodeWorkSpace\c#\VSCode_C#_01\obj\Debug\net5.0\VSCode_C#_01.AssemblyInfoInputs.cache
+E:\Work\VcCodeWorkSpace\c#\VSCode_C#_01\obj\Debug\net5.0\VSCode_C#_01.AssemblyInfo.cs
+E:\Work\VcCodeWorkSpace\c#\VSCode_C#_01\obj\Debug\net5.0\VSCode_C#_01.csproj.CoreCompileInputs.cache
+E:\Work\VcCodeWorkSpace\c#\VSCode_C#_01\obj\Debug\net5.0\VSCode_C#_01.dll
+E:\Work\VcCodeWorkSpace\c#\VSCode_C#_01\obj\Debug\net5.0\ref\VSCode_C#_01.dll
+E:\Work\VcCodeWorkSpace\c#\VSCode_C#_01\obj\Debug\net5.0\VSCode_C#_01.pdb
+E:\Work\VcCodeWorkSpace\c#\VSCode_C#_01\obj\Debug\net5.0\VSCode_C#_01.genruntimeconfig.cache

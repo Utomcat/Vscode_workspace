@@ -1,0 +1,32 @@
+<html>
+    <body>
+
+        <form id="myForm">
+        Firstname: <input id="fname" type="text" value="Mickey" />
+        Lastname: <input id="lname" type="text" value="Mouse" />
+        <input id="sub" type="button" value="Submit" />
+        </form>
+
+        <p>Get the value of all the elements in the form:<br />
+        <script type="text/javascript">
+        var x=document.getElementById("myForm");
+        for (var i=0;i<x.length;i++)
+        {
+        document.write(x.elements[i].value);
+        document.write("<br />");
+        document.write(x.elements[i].type);
+        document.write("<br />");
+        }
+        </script>
+        </p>
+        <p>
+            离人愁      123我爱你   红韶愿      学猫叫      
+            佛系少女    有点甜      咬耳朵      痴情玫瑰花      
+            最美情侣    星空物语    空空如也    带你去旅行   
+            小星星      棉花糖      专属味道    纸短情长    
+            可不可以       给陌生的你听     往后余生    广东十年爱情故事     
+            最后我们没在一起    可能否
+        </p>
+
+    </body>
+</html>

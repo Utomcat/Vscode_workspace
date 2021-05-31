@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <script src="./resources/vue.js" type="text/javascript" charset="utf-8"></script>
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="app">
+            <p>{{ foo }}</p>
+            <p>{{ foo1 }}</p>
+            <button v-on:click="foo = 'baz'">Change foo Object</button>
+            <button v-on:click="foo1 = 'bbb'">Change foo1 Object</button>
+        </div>
+    </body>
+    <script type="text/javascript">
+        var obj = {
+            foo:'bar',
+            foo1:'aaa'
+        }
+        
+        //冻结对象，让其对应的对象的操作无效
+        Object.freeze(obj);
+
+        var vm = new Vue({
+            el:'#app',
+            data:obj
+        });
+
+        console.log(vm);
+
+    </script>
+</html>

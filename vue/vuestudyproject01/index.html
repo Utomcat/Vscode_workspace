@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <script src="./resources/vue.js" type="text/javascript" charset="utf-8"></script>
+    </head>
+    <body>
+        <div id="app">
+            使用“{{str}}”语法在前台显示vue对象中data属性的message的值：{{message}}
+        </div>
+    </body>
+    <script type="text/javascript">
+        var app = new Vue({
+            el:'#app',
+            data:{
+                message:"Hello World!",
+                str:"{{}}"
+            }
+        }); 
+        
+    </script>
+
+</html>

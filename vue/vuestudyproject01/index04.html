@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <script src="./resources/vue.js" type="text/javascript" charset="utf-8"></script>
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="a">
+            {{a}}
+        </div>
+    </body>
+    <script type="text/javascript">
+      new Vue({
+            el:"#a",
+            data: {
+                a: 1
+            },
+            created: function () {
+                // `this` 指向 vm 实例
+                console.log('a is: ' + this.a)
+            },
+            beforeCreate:function() {
+             console.log('a is：'+this.a);   
+            }
+        });
+    </script>
+</html>

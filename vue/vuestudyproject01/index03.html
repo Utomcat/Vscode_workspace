@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <script src="./resources/vue.js" type="text/javascript" charset="utf-8"></script>
+        <title>Document</title>
+    </head>
+    <body>
+            <div id="app">
+                <p>a: {{a}}</p>
+                <p>b的值为：{{b}}</p>
+                <p v-text="b"></p>
+                <button v-on:click="a = 'aaa'">Change a Object</button>
+            </div>
+    </body>
+    <script type="text/javascript">
+        var obj = {
+            a: 1,
+            b: 2,
+            c: 3,
+            d: 4,
+            e: {
+                f: {
+                    g: 5
+                }
+            }
+        }
+
+        var vm = new Vue({
+            el:'#app',
+            data:obj,
+            watch: {
+                a:function(val, oldVal){
+                    console.log('new: %s, old: %s', val, oldVal);
+                    vm.a = '1';
+                }
+            },
+        });
+
+        console.log(vm.$data);
+
+        /**vm.$watch('a',function (val, oldVal){
+            console.log('new: %s, old: %s', val, oldVal);
+        });*/
+
+    </script>
+</html>

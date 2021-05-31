@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <!-- 引入vue的js样式 -->
+        <script type="text/javascript" src="../node_modules/vue/dist/vue.js"></script>
+        <!-- 引入elementui的css样式 -->
+        <link href="../node_modules/element-ui/lib/theme-chalk/index.css" rel="stylesheet"/>
+        <!-- 引入elementui的js样式 -->
+        <script type="text/javascript" src="../node_modules/element-ui/lib/index.js"></script>
+        <title>ElementUI初始学习</title>
+    </head>
+    <body>
+        <div id="app">
+            <el-button @click="visible = true">Button</el-button>
+            <el-dialog :visible.sync="visible" title="Hello world">
+              <p>Try Element</p>
+            </el-dialog>
+          </div>
+    </body>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el:"#app",
+            /* data的写法：
+               1、写法一： data:{}
+               2、写法二：data(){
+                   return{
+
+                   }
+               }
+               3、写法三：data:function(){
+                   return{
+
+                   }
+               }
+             */
+            data:function(){
+                return{
+                    visible:false
+                }
+            }
+        });
+    </script>
+</html>

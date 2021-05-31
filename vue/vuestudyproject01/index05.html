@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">        
+        <script src="./resources/vue.js" type="text/javascript" charset="utf-8"></script>
+        <style type="text/css">
+            .box{
+                width:1000px;
+                height:300px;
+                background-color:red;
+                color: #fff;
+            }
+            .active{
+                background-color: green;
+            }
+            .active1{
+                color: red;
+            }
+        </style>
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="app">
+            {{ msg }}
+        </div>
+
+
+        <hr/>
+        <div id="app1">
+            v-model标签双向数据绑定测试<br/>
+
+            使用v-model 实现数据双向绑定：<br/>
+            <input type="text"  v-model='msg' />
+            <h1 v-text='msg'></h1>
+
+            使用v-bind 和 v-on 实现数据的双向绑定：<br/>
+            <input type="text" :value='msg1' v-on:input='valueChange' />
+            <h1 v-text='msg1'></h1>
+        </div>
+
+
+
+
+
+        <hr/>
+        以下方式使用v-if和v-else标签无效
+        <div v-if="msg3>0.5">
+            显示
+        </div>
+        <div v-else="msg3<=0.5">
+            隐藏
+        </div>
+    </body>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el:'#app',
+            data:function(){
+                return{
+                    msg:'指令系统',
+                    msg2:"<h1>指令系统测试V-html标签</h1>",
+                    isShow:true,
+                    msg3:Math.random(),
+                    msg4:false,
+                    text: '哈哈哈',
+                    isGrend:true,
+                    isRed:true,
+                    menuList:[
+                        {id:1,name:'测试一',price:10},
+                        {id:2,name:'测试二',price:20},
+                        {id:3,name:'测试三',price:30},
+                    ],
+                    person:{
+                        name:'张三',
+                        age:15,
+                        sex:'男'
+                    }
+                        
+                    
+
+                }
+            }, 
+            //p标签里面写的内容  指令系统测试v-text标签 将不会显示，只显示msg的内容
+            template:"<div class='app'>"+
+                            "vue的插值方法</br></br>"+
+                            "1、{{}}:"+
+                            "<h2>{{msg}}</h2>"+
+                            "2、v-text标签（标签内可以直接存放具体的值，也可以存放表达式）:"+
+                            "<p v-text='msg'>指令系统测试v-text标签 存放值</p>"+
+                            "<div v-text='1+1'>存放表达式</div></br>"+
+                            "3、v-html标签："+
+                            "<div v-html='msg2'></div>"+
+                            "v-if/v-else标签：</br>"+
+                            "<div v-if='isShow'>XXXX开业</div>"+
+                            "<div v-if='!isShow'>XXXX关闭</div>"+
+                            "<div v-if='Math.random() > 0.5'>show</div>"+
+                            "<div v-else>hidden</div>"+
+                            "<hr/>v-show标签：<br/>"+
+                            "<div v-show='msg4'>show</div>"+
+                            "<div v-show='!msg4'>hidden</div>"+
+                            "<hr/>v-bind v-on标签:<br/>"+
+                            "<div class='box' v-on:click='clickHandler' v-bind:aaa='text':class={active:isGrend,active1:isRed}>v-bind标签的使用:<br/>写法：v-bind:属性名={属性值:是否生效} 或 v-bind:属性名='属性值'<br/><br/>示例：<br/>v-bind:class={active:true(名为active的class样式生效)/false(名为active的class样式无效)}<br/>v-bind:aaa='text'<br/>v-bind的简写为 直接使用:</div>"+
+                            "<hr/>v-for循环遍历使用：<br/>"+
+                            "<ul><li v-for='(item,index) in menuList'><h3>索引： {{index}}</h3><h4 v-text='item.id'></h4><h5>{{item.name}}</h5><em>{{item.price}}</em></li></ul>"+
+                            "<ul><li v-for='(value,key) in person'>{{key}} ==> {{value}}</li></ul>"+
+                    "</div>"
+                    ,
+            methods: {
+             clickHandler(e){
+                //console.log(this);
+                this.isGrend = !this.isGrend;
+                this.isRed = !this.isRed;
+             }   
+            }
+        });
+
+
+        var vm1 = new Vue({
+            el:"#app1",
+            data(){
+                return{
+                    msg:"测试用例一",
+                    msg1:"测试用例二"
+                }
+            },
+            methods:{
+                valueChange(e){
+                    console.log(e.target.value);
+                    this.msg1 = e.target.value;
+                }
+            }
+        });
+
+    </script>
+</html>

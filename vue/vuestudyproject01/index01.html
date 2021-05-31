@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <script src="./resources/vue.js" type="text/javascript" charset="utf-8"></script>
+        <title>Document</title>
+    </head>
+    <body>
+
+        <div id="a">
+                模板语法插值示例：<br/>
+                <hr/>
+                vue对象值常规字符串示例：{{a}}<br/>
+                {{b}}<br/>
+                vue对象值boolean示例：{{isTrue}}<br/>
+                反向输出字符串示例：{{str.split('').reverse().join('')}}<br/>
+                三目运算示例：{{ 1<2?"true":"false" }}<br/>
+                字符串输出示例：{{ '啊啊啊啊' }}<br/>
+                对象输出示例：{{ {name:"张三"} }}<br/>
+
+
+
+        </div>
+        
+        
+    </body>
+    <script type="">
+
+        //数据对象
+        var data = {a:"Hello World!",
+                    b:"黄瓜",
+                    isTrue:1==1,
+                    str:"hello vue!"
+        }
+
+        //创建vue对象
+        var vm = new Vue({
+            el: "#a",
+            //将数据对象添加到vue对象中
+            data:data,
+            //当vue对象的template属性有值时，会优先渲染此属性里面的值，
+            //而不会加载el属性的值,如下会显示aaaaa，而不是加载id=a的值
+            template:'<div>aaaaa</div>'
+        }); 
+
+        //用于确认vm对象中的data属性的变量a的值和data对象中的a值是否一致
+        console.log(vm.a == data.a);
+
+        //修改vue对象vm 和 修改data对象的值相关影响(因data对象已与vm对象的data属性关联)
+        //修改vm对象的a的值
+        vm.a = 2;
+        //data对象中的a属性同时修改
+        console.log(data.a);
+
+        //修改data对象的a属性
+        data.a = 3;
+        //vm对象中的data属性的a的值同样改变
+        console.log(vm.a);
+
+
+
+    </script>
+</html>

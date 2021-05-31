@@ -1,0 +1,164 @@
+<mxfile>
+    <diagram id="l0IkxFJSzTEdPM1y2eEL" name="功能模块图">
+        <mxGraphModel dx="2441" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="5" target="6" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="5" target="7" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="房屋结构安全管理" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="-473" y="40" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <UserObject label="结构安全业务办理" link="data:page/id,ZR7NsUe1XzxtZsCaEVlA" id="6">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                        <mxGeometry x="-593" y="200" width="120" height="60" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <UserObject label="结构安全成果查询" link="data:page/id,jcjUHkQA_Ne0YLqBGo-O" id="7">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                        <mxGeometry x="-353" y="200" width="120" height="60" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <mxCell id="12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="10" target="11" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="房屋安全综合管理" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="-473" y="555" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <UserObject label="安全投诉管理" link="data:page/id,m6Mb2y5nwsJTX1rhTW5B" id="11">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                        <mxGeometry x="-473" y="720" width="120" height="60" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="ZR7NsUe1XzxtZsCaEVlA" name="结构安全业务办理">
+        <mxGraphModel dx="2441" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="Jkdt1hsB4tDwg9FyjEGo-0"/>
+                <mxCell id="Jkdt1hsB4tDwg9FyjEGo-1" parent="Jkdt1hsB4tDwg9FyjEGo-0"/>
+                <mxCell id="_LNVLo1ulRH5VSGY4Ua0-0" value="业&lt;br&gt;务&lt;br&gt;查&lt;br&gt;询" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;horizontal=1;" parent="Jkdt1hsB4tDwg9FyjEGo-1" vertex="1">
+                    <mxGeometry x="-680" y="200" width="40" height="140" as="geometry"/>
+                </mxCell>
+                <UserObject label="业&lt;br&gt;务&lt;br&gt;新&lt;br&gt;增" link="data:page/id,x_mrS03eApincgxSqPH9" id="_LNVLo1ulRH5VSGY4Ua0-1">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;horizontal=1;" parent="Jkdt1hsB4tDwg9FyjEGo-1" vertex="1">
+                        <mxGeometry x="-600" y="200" width="40" height="140" as="geometry"/>
+                    </mxCell>
+                </UserObject>
+                <mxCell id="_LNVLo1ulRH5VSGY4Ua0-2" value="业&lt;br&gt;务&lt;br&gt;变&lt;br&gt;更" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;horizontal=1;" parent="Jkdt1hsB4tDwg9FyjEGo-1" vertex="1">
+                    <mxGeometry x="-520" y="200" width="40" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="_LNVLo1ulRH5VSGY4Ua0-3" value="业&lt;br&gt;务&lt;br&gt;删&lt;br&gt;除" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;horizontal=1;" parent="Jkdt1hsB4tDwg9FyjEGo-1" vertex="1">
+                    <mxGeometry x="-360" y="200" width="40" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="_LNVLo1ulRH5VSGY4Ua0-4" value="业&lt;br&gt;务&lt;br&gt;注&lt;br&gt;销" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;horizontal=1;" parent="Jkdt1hsB4tDwg9FyjEGo-1" vertex="1">
+                    <mxGeometry x="-440" y="200" width="40" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="_LNVLo1ulRH5VSGY4Ua0-5" value="业&lt;br&gt;务&lt;br&gt;编&lt;br&gt;辑" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;horizontal=1;" parent="Jkdt1hsB4tDwg9FyjEGo-1" vertex="1">
+                    <mxGeometry x="-280" y="200" width="40" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="_LNVLo1ulRH5VSGY4Ua0-6" value="业&lt;br&gt;务&lt;br&gt;审&lt;br&gt;核" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;horizontal=1;" parent="Jkdt1hsB4tDwg9FyjEGo-1" vertex="1">
+                    <mxGeometry x="-200" y="200" width="40" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="_LNVLo1ulRH5VSGY4Ua0-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Helvetica;" parent="Jkdt1hsB4tDwg9FyjEGo-1" source="_LNVLo1ulRH5VSGY4Ua0-7" target="_LNVLo1ulRH5VSGY4Ua0-4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="_LNVLo1ulRH5VSGY4Ua0-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontFamily=Helvetica;" parent="Jkdt1hsB4tDwg9FyjEGo-1" source="_LNVLo1ulRH5VSGY4Ua0-7" target="_LNVLo1ulRH5VSGY4Ua0-0" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="_LNVLo1ulRH5VSGY4Ua0-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontFamily=Helvetica;" parent="Jkdt1hsB4tDwg9FyjEGo-1" source="_LNVLo1ulRH5VSGY4Ua0-7" target="_LNVLo1ulRH5VSGY4Ua0-1" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="_LNVLo1ulRH5VSGY4Ua0-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontFamily=Helvetica;" parent="Jkdt1hsB4tDwg9FyjEGo-1" source="_LNVLo1ulRH5VSGY4Ua0-7" target="_LNVLo1ulRH5VSGY4Ua0-2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="_LNVLo1ulRH5VSGY4Ua0-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Helvetica;" parent="Jkdt1hsB4tDwg9FyjEGo-1" source="_LNVLo1ulRH5VSGY4Ua0-7" target="_LNVLo1ulRH5VSGY4Ua0-3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="_LNVLo1ulRH5VSGY4Ua0-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Helvetica;" parent="Jkdt1hsB4tDwg9FyjEGo-1" source="_LNVLo1ulRH5VSGY4Ua0-7" target="_LNVLo1ulRH5VSGY4Ua0-5" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="_LNVLo1ulRH5VSGY4Ua0-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Helvetica;" parent="Jkdt1hsB4tDwg9FyjEGo-1" source="_LNVLo1ulRH5VSGY4Ua0-7" target="_LNVLo1ulRH5VSGY4Ua0-6" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="_LNVLo1ulRH5VSGY4Ua0-7" value="结构安全业务办理" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;" parent="Jkdt1hsB4tDwg9FyjEGo-1" vertex="1">
+                    <mxGeometry x="-480" y="40" width="120" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="x_mrS03eApincgxSqPH9" name="结构安全业务新增">
+        &#xa;
+        <mxGraphModel dx="1614" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            &#xa;
+            <root>
+                &#xa;
+                <mxCell id="0OcHFTRjoSaTOrMy6wQS-0"/>
+                &#xa;
+                <mxCell id="0OcHFTRjoSaTOrMy6wQS-1" parent="0OcHFTRjoSaTOrMy6wQS-0"/>
+                &#xa;
+                <mxCell id="bnsvG6jcvYVlCk7mt-v1-0" value="开始" style="html=1;dashed=0;whitespace=wrap;shape=mxgraph.dfd.start;fontFamily=Helvetica;" vertex="1" parent="0OcHFTRjoSaTOrMy6wQS-1">
+                    &#xa;
+                    <mxGeometry x="374" width="80" height="30" as="geometry"/>
+                    &#xa;
+                </mxCell>
+                &#xa;
+                <mxCell id="bnsvG6jcvYVlCk7mt-v1-1" value="" style="html=1;dashed=0;whitespace=wrap;shape=mxgraph.dfd.start;fontFamily=Helvetica;" vertex="1" parent="0OcHFTRjoSaTOrMy6wQS-1">
+                    &#xa;
+                    <mxGeometry x="430" y="730" width="80" height="30" as="geometry"/>
+                    &#xa;
+                </mxCell>
+                &#xa;
+                <mxCell id="bnsvG6jcvYVlCk7mt-v1-2" value="获取并选择&lt;br&gt;房屋信息" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;fontFamily=Helvetica;" vertex="1" parent="0OcHFTRjoSaTOrMy6wQS-1">
+                    &#xa;
+                    <mxGeometry x="790" y="150" width="100" height="60" as="geometry"/>
+                    &#xa;
+                </mxCell>
+                &#xa;
+                <mxCell id="bnsvG6jcvYVlCk7mt-v1-3" value="" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.database;whiteSpace=wrap;fontFamily=Helvetica;" vertex="1" parent="0OcHFTRjoSaTOrMy6wQS-1">
+                    &#xa;
+                    <mxGeometry x="986" y="150" width="60" height="60" as="geometry"/>
+                    &#xa;
+                </mxCell>
+                &#xa;
+            </root>
+            &#xa;
+        </mxGraphModel>
+        &#xa;
+    </diagram>
+    <diagram id="jcjUHkQA_Ne0YLqBGo-O" name="结构安全成果查询">
+        &#xa;
+        <mxGraphModel dx="1614" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            &#xa;
+            <root>
+                &#xa;
+                <mxCell id="PKg76OMlct0KMDnFniSg-0"/>
+                &#xa;
+                <mxCell id="PKg76OMlct0KMDnFniSg-1" parent="PKg76OMlct0KMDnFniSg-0"/>
+                &#xa;
+            </root>
+            &#xa;
+        </mxGraphModel>
+        &#xa;
+    </diagram>
+    <diagram id="m6Mb2y5nwsJTX1rhTW5B" name="安全投诉管理">
+        &#xa;
+        <mxGraphModel dx="1614" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            &#xa;
+            <root>
+                &#xa;
+                <mxCell id="q3sPnuZfV9ziresbVq81-0"/>
+                &#xa;
+                <mxCell id="q3sPnuZfV9ziresbVq81-1" parent="q3sPnuZfV9ziresbVq81-0"/>
+                &#xa;
+            </root>
+            &#xa;
+        </mxGraphModel>
+        &#xa;
+    </diagram>
+</mxfile>
