@@ -6,17 +6,18 @@ import java.util.Collection;
 import java.util.Map;
 
 import com.ranyk.www.demo.enums.MethodNameEnum;
+import com.ranyk.www.demo.model.Personel;
 
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * @class_name: ObjectHandler
- * @description: 对象处理类 
+ * @description: 对象处理类
  * 
  * @author ranyk
  */
 @Slf4j
- public class ObjectHandler {
+public class ObjectHandler {
 
 
     /**
@@ -105,7 +106,8 @@ import lombok.extern.slf4j.Slf4j;
      * @param parameterType 执行方法的入参参数类型
      */
     @SuppressWarnings("all")
-    public static Object invokeSpecifyMethod(Class<?> clz, Object o, String methodName, Object value, Class<?> parameterType) {
+    public static Object invokeSpecifyMethod(Class<?> clz, Object o, String methodName, Object value,
+            Class<?> parameterType) {
         if (ObjectHandler.objectIsEmpty(value)) {
             return null;
         }
@@ -148,5 +150,25 @@ import lombok.extern.slf4j.Slf4j;
         sb.insert(0, key);
         return sb.toString();
     }
-    
+
+
+    /**
+     * 利用反射执指定对象指定属性的get方法
+     * 
+     * @param clazz    需要执行get方法的类的 Class 对象
+     * @param o        需要执行get方法的对象
+     * @param property 需要获取的属性
+     * @return 返回执行get方法后的返回值
+     */
+    public static Object invokeGetMethod(Class<? extends Personel> clazz, Object o, String property) {
+        try {
+            
+            Method method = clazz.getDeclaredMethod(getSetterOrGetterMethodName(property, MethodNameEnum.GET_METHOD.getValue()), (Class<?>[]) new Class[0]);
+            return method.invoke(o);
+        } catch (NullPointerException | NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+            throw new RuntimeException("执行指定对象的指定属性 " + property + " 的 get 方法出错,错误信息为: " + e.getMessage() + " 错误异常行号为: "
+                    + e.getStackTrace()[0].getLineNumber());
+        }
+    }
+
 }

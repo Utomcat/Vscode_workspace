@@ -21,6 +21,8 @@ import com.google.common.collect.*;
 import com.ranyk.www.demo.enums.CheckHouAtOtherBizType;
 import com.ranyk.www.demo.model.Personel;
 import com.ranyk.www.demo.util.FileUtil;
+import com.ranyk.www.demo.util.ObjectHandler;
+
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.StringUtils;
 
@@ -304,6 +306,18 @@ class DemoApplicationTests {
 		methodList.forEach(method -> {
 			log.info("当前通过反射获取的方法名为 ==> {}, 方法参数类型为 ==> {}", method.getName(), method.getParameterTypes());
 		});
+	}
+
+
+	/**
+	 * 执行反射的get方法
+	 */
+	@Test
+	void test14() {
+		Personel personel = new Personel("张三", 20, 1);
+		Class<? extends Personel> clazz = personel.getClass();
+		Integer resutl = ObjectHandler.cast(ObjectHandler.invokeGetMethod(clazz, personel, "sex"));
+		log.info("利用反射执行get属性值的结果为: {}",resutl);
 	}
 
 }
