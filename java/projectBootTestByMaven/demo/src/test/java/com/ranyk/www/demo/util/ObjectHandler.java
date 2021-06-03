@@ -5,8 +5,11 @@ import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.Map;
 
+import com.ranyk.www.demo.enums.DataTypeEnum;
 import com.ranyk.www.demo.enums.MethodNameEnum;
 import com.ranyk.www.demo.model.Personel;
+
+import org.springframework.util.Assert;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -41,9 +44,33 @@ public class ObjectHandler {
      */
     @SuppressWarnings("unchecked")
     public static <T> T get(Class<?> clz, Object o) {
+        // 1. 传入的值是对应的class类型,则直接进行强制类型转换
         if (clz.isInstance(o)) {
             return (T) clz.cast(o);
         }
+        // 2. 当传入的为 String 值,而类型为 Integer 时,需要进行类型处理
+        if (DataTypeEnum.INTEGER_ENUM.getValue().equals(clz.getName())) {
+            String value;
+            try {
+                value = get(String.class, o);
+            } catch (Exception e) {
+                log.error("在对获取指定类型的值时发生异常,异常信息为  {} ,将进行类型的强制转换.", e.getMessage());
+                value = (String) o;
+            }
+            Assert.notNull(value, "在通过类型进行值类型整形转换时,获取到的值为空!");
+            Integer result;
+            try {
+                result = Integer.valueOf(value);
+            } catch (Exception e) {
+                log.error("在将String转换为Integer时发生异常,异常信息为 {} , 当前传入的 String 类型数据的值为 {},将返回结果设置为 0.", e.getMessage(),
+                        value);
+                result = 0;
+            }
+            return (T) result;
+        }
+        // 3. 如果是其他类型需要进行处理的则在此处
+
+        // 4. 最后再返回空值
         return null;
     }
 

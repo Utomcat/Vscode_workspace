@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -301,6 +302,21 @@ class DemoApplicationTests {
 		Class<? extends Personel> clazz = personel.getClass();
 		Integer resutl = ObjectHandler.cast(ObjectHandler.invokeGetMethod(clazz, personel, "sex"));
 		log.info("利用反射执行get属性值的结果为: {}", resutl);
+	}
+
+
+	@Test
+	void test15(){
+		Personel personel = new Personel("张三", 20, 1);
+		Map<String,Object> map = new HashMap<>(6);
+		map.put("sex", "2");
+		try {
+			Field field = personel.getClass().getDeclaredField("sex");
+			Integer result = ObjectHandler.get(field.getType(), "AAAA");
+			log.info("查询结果为 ==> {}",result);
+		} catch (NoSuchFieldException | SecurityException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
