@@ -1,0 +1,1 @@
+<string xmlns="http://tempuri.org/">{"data":[{"buildid":"201901071175","buildname":"云台山路910号", "buildingno":"910号","use":"住宅","buildstru":"混合结构","sumfloors":"4","maxfloor":"4","minfloor":"1","buildarea":"363.97","district":"博望区","street":"云台山路","doorno":"","subdoorno":"","buildcomyear":"","locationbld":"云台山路910号","buildingnobld":"原博望镇红旗街2号","allareas":"363.97"}]}</string>
