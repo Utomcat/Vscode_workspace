@@ -1,10 +1,7 @@
 package com.ranyk.www.demo.util;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -15,28 +12,18 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import com.ranyk.www.demo.enums.CompressedSuffixEnum;
-import com.ranyk.www.demo.enums.ExceptionEnum;
 import com.ranyk.www.demo.exception.CustomException;
 
 import lombok.extern.slf4j.Slf4j;
 
-/**
- * @CLASS_NAME: FileUtil.java
- * @description: 文件处理工具类
- * 
- * @author: ranYk
- * @version: V1.0
- */
 @Slf4j
-public class FileUtil {
-
+public class FileTestUtil {
     /**
      * 定义的字节数组大小
      */
-    private static final int BUFFER_SIZE = 2 * 1024;
+    private final static int BUFFER_SIZE = 2 * 1024;
 
-    private FileUtil() {
+    private FileTestUtil() {
 
     }
 
@@ -140,8 +127,7 @@ public class FileUtil {
             }
             compress(sourceFile, zos, sourceFile.getName(), keepDirStructure);
         } catch (Exception e) {
-            throw new CustomException(ExceptionEnum.EXCEPTION_ZIP_HEAD.getValue(), e.getMessage(),
-                    e.getStackTrace()[0].getLineNumber(), e.getStackTrace()[0].getFileName());
+                    throw new CustomException("压缩文件时发生异常,异常信息为: "  + e.getMessage() + " 报错行为: " + e.getStackTrace()[0].getLineNumber() + " 报错文件为: " + e.getStackTrace()[0].getFileName());
         }
     }
 
@@ -155,33 +141,19 @@ public class FileUtil {
     public static void toZip(List<File> srcFile, OutputStream out) throws CustomException {
         try (var zos = new ZipOutputStream(out)) {
             for (File file : srcFile) {
-                writeZip(file, zos);
+                var buf = new byte[BUFFER_SIZE];
+                zos.putNextEntry(new ZipEntry(file.getName()));
+                int len;
+                var fis = new FileInputStream(file);
+                while ((len = fis.read()) != -1) {
+                    zos.write(buf, 0, len);
+                }
+                zos.closeEntry();
+                fis.close();
             }
         } catch (Exception e) {
-            throw new CustomException(ExceptionEnum.EXCEPTION_ZIP_HEAD.getValue(), e.getMessage(),
-                    e.getStackTrace()[0].getLineNumber(), e.getStackTrace()[0].getFileName());
-        }
-    }
-
-    /**
-     * 向zip文件中写入内容
-     * 
-     * @param file 需向zip文件中写入的文件对象
-     * @param zos  zip文件对象
-     * @throws CustomException 出现异常,抛出自定义异常
-     */
-    public static void writeZip(File file, ZipOutputStream zos) throws CustomException {
-        var buf = new byte[BUFFER_SIZE];
-        int len;
-        try (var fis = new FileInputStream(file)) {
-            zos.putNextEntry(new ZipEntry(file.getName()));
-            while ((len = fis.read()) != -1) {
-                zos.write(buf, 0, len);
-            }
-            zos.closeEntry();
-        } catch (Exception e) {
-            throw new CustomException(ExceptionEnum.EXCEPTION_ZIP_HEAD.getValue(), e.getMessage(),
-                    e.getStackTrace()[0].getLineNumber(), e.getStackTrace()[0].getFileName());
+            throw new CustomException("压缩文件时发生异常,异常信息为: " + e.getMessage() + " 报错行为: "
+                    + e.getStackTrace()[0].getLineNumber() + " 报错文件为: " + e.getStackTrace()[0].getFileName());
         }
     }
 
@@ -227,8 +199,7 @@ public class FileUtil {
         // 3. 获取文件的输入流对象
         try (var fis = new FileInputStream(file)) {
             // 4. 向文件压缩输出流中添加一个压缩实体对象
-            var zipEntry = new ZipEntry(name);
-            zos.putNextEntry(zipEntry);
+            zos.putNextEntry(new ZipEntry(name));
             // 5. 声明单次读取文件内容的长度变量
             int len;
             // 6. 复制文件到压缩输出流中
@@ -290,40 +261,4 @@ public class FileUtil {
         }
     }
 
-    /**
-     * 
-     * 
-     * @param file
-     * @param zipFile
-     * @throws Exception
-     */
-    public static void compressSingleFile(File file, File zipFile) throws CustomException {
-        // 1. 判断入参的压缩文件是否是指定的压缩文件后缀
-        if (!CompressedSuffixEnum.judgeZipFileFormat(zipFile.getName())) {
-            log.error("传入的压缩文件格式不正确!");
-            return;
-        }
-        // 2. 获取原文件的输入流对象 和 获取压缩文件的输出流对象
-        try (var fis = new FileInputStream(file);
-                var bis = new BufferedInputStream(fis);
-                var dis = new DataInputStream(bis);
-                var fos = new FileOutputStream(zipFile);
-                var bos = new BufferedOutputStream(fos);
-                var zos = new ZipOutputStream(bos);) {
-            // 4. 创建压缩实体对象
-            var zipEntry = new ZipEntry(file.getName());
-            // 5. 将压缩实体添加进压缩输出流中
-            zos.putNextEntry(zipEntry);
-            int len;
-            var buf = new byte[BUFFER_SIZE];
-            while ((len = dis.read(buf)) != -1) {
-                zos.write(buf, 0, len);
-            }
-        } catch (Exception e) {
-            log.error("在对单个文件进行压缩时发生异常,异常信息为: {} , 异常的文件为: {} , 异常报错行为: {}", e.getMessage(),
-                    e.getStackTrace()[0].getFileName(), e.getStackTrace()[0].getLineNumber());
-            throw new CustomException(ExceptionEnum.EXCEPTION_ZIP_HEAD.getValue(), e.getMessage(),
-                    e.getStackTrace()[0].getLineNumber(), e.getStackTrace()[0].getFileName());
-        }
-    }
 }

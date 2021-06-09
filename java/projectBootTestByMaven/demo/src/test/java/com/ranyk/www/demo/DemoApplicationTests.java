@@ -4,10 +4,12 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.Base64.Decoder;
 import java.util.stream.Collectors;
@@ -208,7 +210,7 @@ class DemoApplicationTests {
 	void test9() {
 		try {
 			String path = this.getClass().getResource("/").getPath();
-			File file = new File(path + "/202101081231.zip");
+			File file = new File(path + "/20021001.zip");
 			FileInputStream zipFile = new FileInputStream(file);
 			ZipInputStream zis = new ZipInputStream(zipFile);
 			log.info("zip的文件大小为: ==> {}  byte", file.length());
@@ -304,19 +306,48 @@ class DemoApplicationTests {
 		log.info("利用反射执行get属性值的结果为: {}", resutl);
 	}
 
-
 	@Test
-	void test15(){
+	void test15() {
 		Personel personel = new Personel("张三", 20, 1);
-		Map<String,Object> map = new HashMap<>(6);
+		Map<String, Object> map = new HashMap<>(6);
 		map.put("sex", "2");
 		try {
 			Field field = personel.getClass().getDeclaredField("sex");
 			Integer result = ObjectHandler.get(field.getType(), "AAAA");
-			log.info("查询结果为 ==> {}",result);
+			log.info("查询结果为 ==> {}", result);
 		} catch (NoSuchFieldException | SecurityException e) {
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * 压缩文件测试方法
+	 */
+	@Test
+	void test16() {
+		String zipPath = this.getClass().getResource("/").getPath() + LocalDateTime.now().getNano() + ".zip";
+		String filePath = this.getClass().getResource("/").getPath() + "templates/101.pdf";
+		log.info("需压缩的文件的路径为 {}, 压缩文件的路径为: {}", filePath, zipPath);
+		File zipFile =  new File(zipPath);
+		File file = new File(filePath);
+		try {
+			if(!zipFile.exists() && zipFile.createNewFile()){
+				log.info("创建压缩文件成功!");
+			}
+			if(!file.exists()){
+				log.error("需被压缩文件不存在!");
+				return;
+			}
+		} catch (IOException e) {
+			log.error("创建或获取压缩文件对象失败!异常信息为: {}", e.getMessage());
+			return;
+		}
+		try(var out = new FileOutputStream(zipFile)){
+			FileUtil.compressSingleFile(file,zipFile);
+		}catch(Exception e){
+			log.error("压缩失败,异常信息为: {}", e.getMessage());
+			return;
+		}
+		log.info("压缩成功!");
+	}
 }
