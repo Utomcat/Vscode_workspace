@@ -10,4 +10,4 @@ spring:
 # 自定义配置属性
 myConfig: 
   roomUrl: classpath:templates/BldroomInterface_S.txt
-  roomImgUrl: classpath:templates/HouseImgInterface.txt
+  roomImgUrl: classpath:templates/HouseImgInterface_S.txt

@@ -1,0 +1,12 @@
+
+        // 本地测试请求接口进行改变
+        houUrl = "http://localhost:8080/test/getRoomInfo";
+        imgUrl = "http://localhost:8080/test/getRoomImgPath";
+
+        } else {
+                    realImgUrl = result.replace("<string xmlns=\"http://tempuri.org/\">", "").replace("</string>", "");
+
+
+                    URLConnection urlConnection = url.openConnection();
+            if (urlConnection != null) {
+                is = urlConnection.getInputStream();

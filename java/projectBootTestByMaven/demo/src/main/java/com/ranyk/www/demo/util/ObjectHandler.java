@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.ranyk.www.demo.enums.DataTypeEnum;
 import com.ranyk.www.demo.enums.MethodNameEnum;
+import com.ranyk.www.demo.exception.CustomException;
 
 import org.springframework.util.Assert;
 
@@ -21,8 +22,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ObjectHandler {
 
-    private ObjectHandler(){
-        
+    private ObjectHandler() {
+
     }
 
     /**
@@ -111,7 +112,7 @@ public class ObjectHandler {
             }
             boolean empty = true;
             for (Object o : objects) {
-                if (!objectIsEmpty(o)) {
+                if (!(boolean) objectIsEmpty(o)) {
                     empty = false;
                     break;
                 }
@@ -133,8 +134,9 @@ public class ObjectHandler {
      */
     @SuppressWarnings("all")
     public static Object invokeSpecifyMethod(Class<?> clz, Object o, String methodName, Object value,
-            Class<?> parameterType) {
-        if (ObjectHandler.objectIsEmpty(value)) {
+            Class<?>[] parameterType) {
+        if (ObjectHandler.objectIsEmpty(value) && !methodName.startsWith(MethodNameEnum.GET_METHOD.getValue())) {
+            log.info("利用反射执行指定方法时,未传入有关值,当前执行的方法名为 {}", methodName);
             return null;
         }
         try {
@@ -163,16 +165,17 @@ public class ObjectHandler {
      *                 getUserName();
      * @param key      获取set/get方法key
      * @return 返回对应属性的get或set方法名
+     * @throws CustomException
      */
-    public static String getSetterOrGetterMethodName(String property, String key) {
-        if (ObjectHandler.objectIsEmpty(property)) {
-            throw new RuntimeException("属性名为空!");
+    public static String getSetterOrGetterMethodName(String property, String key) throws CustomException {
+        if ((boolean) ObjectHandler.objectIsEmpty(property)) {
+            throw new CustomException("属性名为空!");
         }
-        StringBuilder sb = new StringBuilder(property);
-        if (Character.isLowerCase(sb.charAt(0))) {
-            if (sb.length() == 1 || !Character.isUpperCase(sb.charAt(1))) {
-                sb.setCharAt(0, Character.toUpperCase(sb.charAt(0)));
-            }
+        var sb = new StringBuilder(property);
+        boolean changeCapitalLetters = Character.isLowerCase(sb.charAt(0))
+                && (sb.length() == 1 || !Character.isUpperCase(sb.charAt(1)));
+        if (changeCapitalLetters) {
+            sb.setCharAt(0, Character.toUpperCase(sb.charAt(0)));
         }
         sb.insert(0, key);
         return sb.toString();
@@ -186,16 +189,17 @@ public class ObjectHandler {
      * @param property 需要获取的属性
      * @return 返回执行get方法后的返回值
      */
-    public static Object invokeGetMethod(Class<? extends Object> clazz, Object o, String property) {
+    public static Object invokeGetMethod(Class<? extends Object> clazz, Object o, String property)
+            throws CustomException {
         try {
 
-            Method method = clazz.getDeclaredMethod(
+            var method = clazz.getDeclaredMethod(
                     getSetterOrGetterMethodName(property, MethodNameEnum.GET_METHOD.getValue()),
                     (Class<?>[]) new Class[0]);
             return method.invoke(o);
         } catch (NullPointerException | NoSuchMethodException | SecurityException | IllegalAccessException
                 | IllegalArgumentException | InvocationTargetException e) {
-            throw new RuntimeException("执行指定对象的指定属性 " + property + " 的 get 方法出错,错误信息为: " + e.getMessage() + " 错误异常行号为: "
+            throw new CustomException("执行指定对象的指定属性 " + property + " 的 get 方法出错,错误信息为: " + e.getMessage() + " 错误异常行号为: "
                     + e.getStackTrace()[0].getLineNumber());
         }
     }

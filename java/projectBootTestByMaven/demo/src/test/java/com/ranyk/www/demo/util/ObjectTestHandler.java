@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
  * @author ranyk
  */
 @Slf4j
-public class ObjectHandler {
+public class ObjectTestHandler {
 
     /**
      * 强制类型转换方法

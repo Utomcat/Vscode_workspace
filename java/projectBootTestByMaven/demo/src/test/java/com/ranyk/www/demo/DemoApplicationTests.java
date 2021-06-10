@@ -1,18 +1,24 @@
 package com.ranyk.www.demo;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.Base64.Decoder;
 import java.util.stream.Collectors;
+import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import org.junit.jupiter.api.Test;
@@ -302,8 +308,18 @@ class DemoApplicationTests {
 	void test14() {
 		Personel personel = new Personel("张三", 20, 1);
 		Class<? extends Personel> clazz = personel.getClass();
-		Integer resutl = ObjectHandler.cast(ObjectHandler.invokeGetMethod(clazz, personel, "sex"));
-		log.info("利用反射执行get属性值的结果为: {}", resutl);
+		try {
+			Integer resutl = ObjectHandler.cast(ObjectHandler.invokeGetMethod(clazz, personel, "sex"));
+			log.info("调用方法 invokeGetMethod 利用反射执行get属性值的结果为: {}", resutl);	
+		} catch (Exception e) {
+			log.info("执行反射的get方法时发生异常,异常信息为: {}", e.getMessage());
+		}
+		try {
+			Integer resutl = ObjectHandler.cast(ObjectHandler.invokeSpecifyMethod(clazz, personel, "getSex", null, (Class<?>[]) new Class[0]));
+			log.info("调用方法 invokeSpecifyMethod 利用反射执行get属性值的结果为: {}", resutl);
+		} catch (Exception e) {
+			log.info("执行反射的get方法时发生异常,异常信息为: {}", e.getMessage());
+		}
 	}
 
 	@Test
@@ -328,13 +344,13 @@ class DemoApplicationTests {
 		String zipPath = this.getClass().getResource("/").getPath() + LocalDateTime.now().getNano() + ".zip";
 		String filePath = this.getClass().getResource("/").getPath() + "templates/101.pdf";
 		log.info("需压缩的文件的路径为 {}, 压缩文件的路径为: {}", filePath, zipPath);
-		File zipFile =  new File(zipPath);
+		File zipFile = new File(zipPath);
 		File file = new File(filePath);
 		try {
-			if(!zipFile.exists() && zipFile.createNewFile()){
+			if (!zipFile.exists() && zipFile.createNewFile()) {
 				log.info("创建压缩文件成功!");
 			}
-			if(!file.exists()){
+			if (!file.exists()) {
 				log.error("需被压缩文件不存在!");
 				return;
 			}
@@ -342,12 +358,74 @@ class DemoApplicationTests {
 			log.error("创建或获取压缩文件对象失败!异常信息为: {}", e.getMessage());
 			return;
 		}
-		try(var out = new FileOutputStream(zipFile)){
-			FileUtil.compressSingleFile(file,zipFile);
-		}catch(Exception e){
+		try (var out = new FileOutputStream(zipFile)) {
+			FileUtil.compressSingleFile(file, zipFile);
+		} catch (Exception e) {
 			log.error("压缩失败,异常信息为: {}", e.getMessage());
 			return;
 		}
 		log.info("压缩成功!");
+	}
+
+	/**
+	 * 测试使用 URL 对象获取文件内容,获取失败
+	 */
+	@Test
+	void test17() {
+		String path = "E:\\Work\\Vscode_workspace\\java\\projectBootTestByMaven\\demo\\target\\classes\\535708700.zip";
+		try {
+			URL url = new URL(path);
+			HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+			if (httpURLConnection.getResponseCode() == 200) {
+				InputStream is = httpURLConnection.getInputStream();
+				ZipInputStream zis = new ZipInputStream(is);
+				ZipEntry zipEntry;
+				if ((zipEntry = zis.getNextEntry()) != null) {
+					if (!zipEntry.isDirectory()) {
+						ByteArrayOutputStream baos = new ByteArrayOutputStream();
+						byte[] bt = new byte[1024];
+						int len;
+						while ((len = zis.read(bt, 0, bt.length)) != -1) {
+							baos.write(bt, 0, len);
+						}
+						String result = new String(baos.toByteArray());
+						log.info("获取的结果为 ==> {}",result.length());
+					}
+				}
+			}
+		} catch (Exception e) {
+			log.error("错误信息 ==> {}", e.getMessage());
+		}
+	}
+
+	/**
+	 * 访问Ftp地址获取有关文件
+	 */
+	@Test
+	void test18() {
+		String path = "ftp://172.16.24.225/361307000.zip";
+		try {
+			URL url = new URL(path);
+			 URLConnection connection =  url.openConnection();
+			if (connection != null) {
+				InputStream is = connection.getInputStream();
+				ZipInputStream zis = new ZipInputStream(is);
+				ZipEntry zipEntry;
+				if ((zipEntry = zis.getNextEntry()) != null) {
+					if (!zipEntry.isDirectory()) {
+						ByteArrayOutputStream baos = new ByteArrayOutputStream();
+						byte[] bt = new byte[1024];
+						int len;
+						while ((len = zis.read(bt, 0, bt.length)) != -1) {
+							baos.write(bt, 0, len);
+						}
+						String result = new String(baos.toByteArray());
+						log.info("获取的结果为 ==> {}", result.length());
+					}
+				}
+			}
+		} catch (Exception e) {
+			log.error("错误信息 ==> {}", e.getMessage());
+		}
 	}
 }
