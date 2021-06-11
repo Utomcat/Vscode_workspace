@@ -106,6 +106,9 @@ class DemoApplicationTests {
 		log.error("{}", personel);
 	}
 
+	/**
+	 * 字符串trim()方法
+	 */
 	@Test
 	void test3() {
 		String str = "  初  七 ";
@@ -125,6 +128,9 @@ class DemoApplicationTests {
 
 	}
 
+	/**
+	 * 字符串拆分测试
+	 */
 	@Test
 	void test4() {
 		byte[] dwx = new byte[1024];
@@ -141,6 +147,9 @@ class DemoApplicationTests {
 		log.error(" 字符拆分的结果为 ==>  {}", JSONObject.toJSON(fileIdData));
 	}
 
+	/**
+	 * 字符串拆分测试
+	 */
 	@Test
 	void test5() {
 		byte[] dwx = new byte[1024];
@@ -160,6 +169,9 @@ class DemoApplicationTests {
 		log.error(" 字符拆分的结果为 ==>  {}", JSONObject.toJSON(fileIdData));
 	}
 
+	/**
+	 * 数组测试
+	 */
 	@Test
 	void test6() {
 		int[] arr = { 0, 0, 0, 0 };
@@ -172,6 +184,9 @@ class DemoApplicationTests {
 		}
 	}
 
+	/**
+	 * 对象状态翻译测试方法
+	 */
 	@Test
 	void test7() {
 		Integer a = Integer.valueOf(0);
@@ -181,11 +196,23 @@ class DemoApplicationTests {
 		log.error("获取到Map中的Integer类型数据后强转为String测试结果为 {}", dicStatusCode);
 	}
 
+	/**
+	 * 强制类型转换方法
+	 * @param <T> 泛型类型,用来对类型转换的返回类型进行定义
+	 * @param obj 传入的需要进行强制类型转换的对象
+	 * @return 返回装换后的数据类型值
+	 */
 	@SuppressWarnings("unchecked")
 	public <T> T cast(Object obj) {
 		return (T) obj;
 	}
 
+	/**
+	 * 翻译对象状态的方法,依据传入的值进行有关值的返回 
+	 * 
+	 * @param code 需要翻译的对象状态code
+	 * @return 返回翻译后的值
+	 */
 	public String translationDicStatusCode(String code) {
 		switch (code) {
 			case "0":
@@ -203,6 +230,11 @@ class DemoApplicationTests {
 		}
 	}
 
+	/**
+	 * 验证 instanceof 关键字的<br/>
+	 * 只能是同中类型或其子类进行判断<br/>
+	 * 如: Integer 不能和 String 类型的数据进行判断<br/>
+	 */
 	@Test
 	void test8() {
 		String str = new String();
@@ -212,6 +244,9 @@ class DemoApplicationTests {
 
 	}
 
+	/**
+	 * 读取zip文件压缩包中的信息,获取其中指定的数据的dwg文件和pdf文件
+	 */
 	@Test
 	void test9() {
 		try {
@@ -253,6 +288,9 @@ class DemoApplicationTests {
 		}
 	}
 
+	/**
+	 * 遍历枚举对象获取定义的此类型的枚举值
+	 */
 	@Test
 	void test10() {
 		CheckHouAtOtherBizType checkType = CheckHouAtOtherBizType.getTypeByName("");
@@ -261,6 +299,9 @@ class DemoApplicationTests {
 				checkType.getCheckEstate(), checkType.getCheckShsCont());
 	}
 
+	/**
+	 * 测试Boolean类型的数据是否满足判断逻辑
+	 */
 	@Test
 	void test11() {
 		Boolean bl = false;
@@ -268,8 +309,12 @@ class DemoApplicationTests {
 			log.info("需要抛出异常");
 			return;
 		}
+		log.info("执行为false的结果");
 	}
 
+	/**
+	 * 模拟解析请求响应后指定字符串结果
+	 */
 	@Test
 	@SuppressWarnings("all")
 	void test12() {
@@ -289,6 +334,11 @@ class DemoApplicationTests {
 		}
 	}
 
+	/**
+	 * 获取某个类中的所有方法名和对应的参数<br/>
+	 * 属性的get方法入参参数为一个空的数组;<br/>
+	 * 属性的set方法入参就是对应入参的class对象数组<br/>
+	 */
 	@Test
 	void test13() {
 		Personel personel = new Personel("张三", 20, 1);
@@ -310,26 +360,31 @@ class DemoApplicationTests {
 		Class<? extends Personel> clazz = personel.getClass();
 		try {
 			Integer resutl = ObjectHandler.cast(ObjectHandler.invokeGetMethod(clazz, personel, "sex"));
-			log.info("调用方法 invokeGetMethod 利用反射执行get属性值的结果为: {}", resutl);	
+			log.info("调用方法 invokeGetMethod 利用反射执行get属性值的结果为: {}", resutl);
 		} catch (Exception e) {
 			log.info("执行反射的get方法时发生异常,异常信息为: {}", e.getMessage());
 		}
 		try {
-			Integer resutl = ObjectHandler.cast(ObjectHandler.invokeSpecifyMethod(clazz, personel, "getSex", null, (Class<?>[]) new Class[0]));
+			Integer resutl = ObjectHandler.cast(
+					ObjectHandler.invokeSpecifyMethod(clazz, personel, "getSex", null, (Class<?>[]) new Class[0]));
 			log.info("调用方法 invokeSpecifyMethod 利用反射执行get属性值的结果为: {}", resutl);
 		} catch (Exception e) {
 			log.info("执行反射的get方法时发生异常,异常信息为: {}", e.getMessage());
 		}
 	}
 
+	/**
+	 * 验证数据类型转换方法能否将字符串转成整形数据
+	 */
 	@Test
 	void test15() {
 		Personel personel = new Personel("张三", 20, 1);
 		Map<String, Object> map = new HashMap<>(6);
 		map.put("sex", "2");
+		map.put("string", "AAAAA");
 		try {
 			Field field = personel.getClass().getDeclaredField("sex");
-			Integer result = ObjectHandler.get(field.getType(), "AAAA");
+			Integer result = ObjectHandler.get(field.getType(), map.get("string"));
 			log.info("查询结果为 ==> {}", result);
 		} catch (NoSuchFieldException | SecurityException e) {
 			e.printStackTrace();
@@ -389,7 +444,7 @@ class DemoApplicationTests {
 							baos.write(bt, 0, len);
 						}
 						String result = new String(baos.toByteArray());
-						log.info("获取的结果为 ==> {}",result.length());
+						log.info("获取的结果为 ==> {}", result.length());
 					}
 				}
 			}
@@ -406,7 +461,7 @@ class DemoApplicationTests {
 		String path = "ftp://172.16.24.225/361307000.zip";
 		try {
 			URL url = new URL(path);
-			 URLConnection connection =  url.openConnection();
+			URLConnection connection = url.openConnection();
 			if (connection != null) {
 				InputStream is = connection.getInputStream();
 				ZipInputStream zis = new ZipInputStream(is);

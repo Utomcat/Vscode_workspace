@@ -39,24 +39,32 @@ public class ObjectHandler {
     }
 
     /**
-     * 根据对应的类型Class对象,将对应的Object对象实例转换成对应的类型,该方法只能用于非集合类型的转换
+     * 根据对应的类型Class对象,将对应的Object对象实例转换成对应的类型<br/>
+     * ,该方法只能用于非集合类型的转换.方法要求: <br/>
+     * 1. 传入的实例对象需要是对应的 Class 对象的实例或有关子类对象;<br/>
+     * 2. 对数字的String类型可转成Integer类型;<br/>
+     * 3. 其他类型转换暂不支持;<br/>
      *
      * @param clz 对应的Class对象
      * @param o   需要转换的实例对象
      * @param <T> 需要转换的类型,使用泛型替代
-     * @return 返回转换后的对应类型对象
+     * @return 返回转换后的对应类型对象,默认返回null;
      */
     @SuppressWarnings("unchecked")
-    public static <T> T get(Class<?> clz, Object o) {
+    public static <T, V> V get(Class<?> clz, T o) {
         // 1. 传入的值是对应的class类型,则直接进行强制类型转换
         if (clz.isInstance(o)) {
-            return (T) clz.cast(o);
+            return (V) clz.cast(o);
         }
         // 2. 当传入的为 String 值,而类型为 Integer 时,需要进行类型处理
         if (DataTypeEnum.INTEGER_ENUM.getValue().equals(clz.getName())) {
             String value;
             try {
-                value = get(String.class, o);
+                if (o instanceof String) {
+                    value = get(String.class, (String) o);
+                } else {
+                    value = "0";
+                }
             } catch (Exception e) {
                 log.error("在对获取指定类型的值时发生异常,异常信息为  {} ,将进行类型的强制转换.", e.getMessage());
                 value = (String) o;
@@ -70,7 +78,7 @@ public class ObjectHandler {
                         value);
                 result = 0;
             }
-            return (T) result;
+            return (V) result;
         }
         // 3. 如果是其他类型需要进行处理的则在此处
 
@@ -192,7 +200,6 @@ public class ObjectHandler {
     public static Object invokeGetMethod(Class<? extends Object> clazz, Object o, String property)
             throws CustomException {
         try {
-
             var method = clazz.getDeclaredMethod(
                     getSetterOrGetterMethodName(property, MethodNameEnum.GET_METHOD.getValue()),
                     (Class<?>[]) new Class[0]);
