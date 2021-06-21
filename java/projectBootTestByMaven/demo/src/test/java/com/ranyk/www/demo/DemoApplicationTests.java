@@ -198,6 +198,7 @@ class DemoApplicationTests {
 
 	/**
 	 * 强制类型转换方法
+	 * 
 	 * @param <T> 泛型类型,用来对类型转换的返回类型进行定义
 	 * @param obj 传入的需要进行强制类型转换的对象
 	 * @return 返回装换后的数据类型值
@@ -208,7 +209,7 @@ class DemoApplicationTests {
 	}
 
 	/**
-	 * 翻译对象状态的方法,依据传入的值进行有关值的返回 
+	 * 翻译对象状态的方法,依据传入的值进行有关值的返回
 	 * 
 	 * @param code 需要翻译的对象状态code
 	 * @return 返回翻译后的值
@@ -482,5 +483,75 @@ class DemoApplicationTests {
 		} catch (Exception e) {
 			log.error("错误信息 ==> {}", e.getMessage());
 		}
+	}
+
+	/**
+	 * List remove 指定对象测试
+	 */
+	@Test
+	void test19() {
+		List<Personel> list = new ArrayList<>();
+		Personel personel1 = new Personel("张三", 2);
+		Personel personel2 = new Personel("李四", 2);
+		Personel personel3 = new Personel("王五", 2);
+		list.add(personel1);
+		list.add(personel2);
+		list.add(personel3);
+		log.info("移除元素之前List集合的值 ==> {}", JSON.toJSONString(list));
+		list.remove(personel1);
+		log.info("移除元素之后List集合的值 ==> {}", JSON.toJSONString(list));
+	}
+
+	/**
+	 * 字符串截取测试
+	 */
+	@Test
+	void test20() {
+		StringBuilder sb = new StringBuilder("123,456,2345,123466,112456,");
+		log.info("字符截取之前的结果 ==> {}", sb.toString());
+		String result = sb.toString().substring(0, sb.lastIndexOf(","));
+		log.info("字符截取之后的结果 ==> {}", result);
+
+	}
+
+	/**
+	 * org.springframework.util.StringUtils.hasText  和
+	 * org.springframework.util.StringUtils.hasLength  方法对不同数据类型的数据进行判空处理的结果验证
+	 */
+	@Test
+	void test21() {
+		Integer str = 123456;
+		Integer str1 = null;
+		String str2 = "";
+		String str3 = null;
+		log.info("Integer 类型数据有正常的数字值,用 hasText 方法的结果为: {} , 用 hasLength 方法的结果为: {}",
+				StringUtils.hasText(String.valueOf(str)), StringUtils.hasLength(String.valueOf(str)));
+		log.info("Integer 类型数据为null,用 hasText 方法的结果为: {} , 用 hasLength 方法结果为: {}",
+				StringUtils.hasText(String.valueOf(str1)), StringUtils.hasLength(String.valueOf(str1)));
+
+		log.info("String 类型数据值为 \"\" ,用 hasText 方法的结果为: {} , hasLength 方法结果为: {}",
+				StringUtils.hasText(str2), StringUtils.hasLength(str2));
+		log.info("String 类型数据值为 null ,用 hasText 方法的结果为: {} , hasLength 方法结果为: {}",
+				StringUtils.hasText(str3), StringUtils.hasLength(str3));
+
+	}
+
+	/**
+	 * String.join() 方法测试
+	 */
+	@Test
+	void test22() {
+		List<String> list1 = new ArrayList<>();
+		list1.add("Java");
+		list1.add("is");
+		list1.add("cool");
+		Set<String> set1 = new HashSet<>();
+		set1.add("PHP");
+		set1.add("is");
+		set1.add("cool");
+		String result1 = String.join(",", list1);
+		String result2 = String.join(",", set1);
+		log.info("String.join + List ==> {}", result1);
+		log.info("String.join + Set ==> {}", result2);
 	}
 }
