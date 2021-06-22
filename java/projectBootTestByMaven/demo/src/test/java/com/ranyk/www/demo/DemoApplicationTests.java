@@ -554,4 +554,28 @@ class DemoApplicationTests {
 		log.info("String.join + List ==> {}", result1);
 		log.info("String.join + Set ==> {}", result2);
 	}
+
+	/**
+	 * Collections.singletonList() 方法测试其创建的 List 集合的长度
+	 */
+	@Test
+	void test23() {
+		List<String> lists = Collections.singletonList(new String());
+		List<String> list2 = new ArrayList<String>();
+		List<String> list3 = Collections.emptyList();
+		log.info("创建的 List 的长度为: ==> {}", lists.size());
+		log.info("创建的 List2 的长度为: ==> {}", list2.size());
+		log.info("创建的 List3 的长度为: ==> {}", list3.size());
+	}
+
+	/**
+	 * 字符串拼接后长度和结果的测试
+	 */
+	@Test
+	void test24() {
+		String sql = "(";
+		sql += ")";
+		log.info("拼接的SQL范围为: ==> {} , 其字符串的长度为: ==> {}",sql,sql.length());
+	}
+
 }
