@@ -515,8 +515,8 @@ class DemoApplicationTests {
 	}
 
 	/**
-	 * org.springframework.util.StringUtils.hasText  和
-	 * org.springframework.util.StringUtils.hasLength  方法对不同数据类型的数据进行判空处理的结果验证
+	 * org.springframework.util.StringUtils.hasText 和
+	 * org.springframework.util.StringUtils.hasLength 方法对不同数据类型的数据进行判空处理的结果验证
 	 */
 	@Test
 	void test21() {
@@ -529,10 +529,10 @@ class DemoApplicationTests {
 		log.info("Integer 类型数据为null,用 hasText 方法的结果为: {} , 用 hasLength 方法结果为: {}",
 				StringUtils.hasText(String.valueOf(str1)), StringUtils.hasLength(String.valueOf(str1)));
 
-		log.info("String 类型数据值为 \"\" ,用 hasText 方法的结果为: {} , hasLength 方法结果为: {}",
-				StringUtils.hasText(str2), StringUtils.hasLength(str2));
-		log.info("String 类型数据值为 null ,用 hasText 方法的结果为: {} , hasLength 方法结果为: {}",
-				StringUtils.hasText(str3), StringUtils.hasLength(str3));
+		log.info("String 类型数据值为 \"\" ,用 hasText 方法的结果为: {} , hasLength 方法结果为: {}", StringUtils.hasText(str2),
+				StringUtils.hasLength(str2));
+		log.info("String 类型数据值为 null ,用 hasText 方法的结果为: {} , hasLength 方法结果为: {}", StringUtils.hasText(str3),
+				StringUtils.hasLength(str3));
 
 	}
 
@@ -575,7 +575,22 @@ class DemoApplicationTests {
 	void test24() {
 		String sql = "(";
 		sql += ")";
-		log.info("拼接的SQL范围为: ==> {} , 其字符串的长度为: ==> {}",sql,sql.length());
+		log.info("拼接的SQL范围为: ==> {} , 其字符串的长度为: ==> {}", sql, sql.length());
 	}
 
+	/**
+	 * 生成随机六位数测试
+	 */
+	@Test
+	void test25() {
+		for (int i = 0; i <= 100; i++) {
+			String sources = "0123456789"; // 加上一些字母，就可以生成pc站的验证码了
+			Random rand = new Random();
+			StringBuffer flag = new StringBuffer();
+			for (int j = 0; j < 6; j++) {
+				flag.append(sources.charAt(rand.nextInt(9)) + "");
+			}
+			log.info("生成的随机数为: ==> {}", flag.toString());
+		}
+	}
 }
