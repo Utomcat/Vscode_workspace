@@ -17,6 +17,7 @@ import java.net.URLConnection;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.Base64.Decoder;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -592,5 +593,27 @@ class DemoApplicationTests {
 			}
 			log.info("生成的随机数为: ==> {}", flag.toString());
 		}
+	}
+
+	@Test
+	void test26() {
+		String a = "1";
+		String b = "3,1,2";
+		String c = "";
+		String d = ",";
+		String e = null;
+		String[] array = { a, b, c, d, e };
+		for (String str : array) {
+			try {
+				String[] result = str.split(",");
+				log.info("当前切割的字符串为 {} ;切割后的结果为 {} ;对应数组的长度为 {}", str, JSON.toJSONString(result), result.length);
+				List<String> list = Arrays.stream(result).filter(StringUtils::hasText).sorted().collect(Collectors.toList());
+				log.info("当前切割的字符串为 {} ;切割后的结果为 {} ;对应数组的长度为 {}", str, JSON.toJSONString(list), list.size());
+				log.info("{}", "------------------------------------------------------------------------------------");
+			} catch (Exception exception) {
+				log.info("当前发生异常,异常的对象为: {} ,异常信息为: {}", str, exception.getMessage());
+			}
+		}
+
 	}
 }

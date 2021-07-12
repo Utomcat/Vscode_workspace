@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
  * @class_name: HouseReqest.java
@@ -13,6 +14,7 @@ import lombok.NoArgsConstructor;
  * @version V1.0
  */
 @Data
+@ToString
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,6 +24,10 @@ import lombok.NoArgsConstructor;
      * 房屋所属楼栋ID
      */
     private String buildId;
+    /**
+     * 建房需求类型
+     */
+    private String buildNeedType;
 
 
 }
