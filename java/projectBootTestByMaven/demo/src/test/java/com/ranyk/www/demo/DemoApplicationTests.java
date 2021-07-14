@@ -17,7 +17,6 @@ import java.net.URLConnection;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.Base64.Decoder;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -614,6 +613,15 @@ class DemoApplicationTests {
 				log.info("当前发生异常,异常的对象为: {} ,异常信息为: {}", str, exception.getMessage());
 			}
 		}
+	}
 
+	@Test
+	void test27() {
+		Boolean bl = null;
+		boolean bl2 = false;
+		boolean bl3 = true;
+		log.info("对比结果1 ==> {}",ObjectHandler.objectIsEmpty(bl));
+		log.info("对比结果2 ==> {}",ObjectHandler.objectIsEmpty(bl2));
+		log.info("对比结果3 ==> {}",ObjectHandler.objectIsEmpty(bl3));
 	}
 }
