@@ -624,4 +624,17 @@ class DemoApplicationTests {
 		log.info("对比结果2 ==> {}",ObjectHandler.objectIsEmpty(bl2));
 		log.info("对比结果3 ==> {}",ObjectHandler.objectIsEmpty(bl3));
 	}
+
+	/**
+	 * boolean 类型数据的默认值,编译不通过
+	 * Boolean 类型数据的默认值,编译不通过
+	 */
+	@Test
+	@SuppressWarnings("all")
+	void test28() {
+		boolean a;
+		Boolean b;
+		//log.info("默认的 boolean 类型的数据为 {}", a);
+		//log.info("默认的 boolean 类型的数据为 {}", b);
+	}
 }
