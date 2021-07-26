@@ -30,6 +30,7 @@ import com.google.common.collect.*;
 import com.ranyk.www.demo.enums.CheckHouAtOtherBizType;
 import com.ranyk.www.demo.model.Personel;
 import com.ranyk.www.demo.util.FileUtil;
+import com.ranyk.www.demo.util.NumberHandler;
 import com.ranyk.www.demo.util.ObjectHandler;
 
 import org.springframework.boot.test.context.SpringBootTest;
@@ -606,7 +607,8 @@ class DemoApplicationTests {
 			try {
 				String[] result = str.split(",");
 				log.info("当前切割的字符串为 {} ;切割后的结果为 {} ;对应数组的长度为 {}", str, JSON.toJSONString(result), result.length);
-				List<String> list = Arrays.stream(result).filter(StringUtils::hasText).sorted().collect(Collectors.toList());
+				List<String> list = Arrays.stream(result).filter(StringUtils::hasText).sorted()
+						.collect(Collectors.toList());
 				log.info("当前切割的字符串为 {} ;切割后的结果为 {} ;对应数组的长度为 {}", str, JSON.toJSONString(list), list.size());
 				log.info("{}", "------------------------------------------------------------------------------------");
 			} catch (Exception exception) {
@@ -620,21 +622,75 @@ class DemoApplicationTests {
 		Boolean bl = null;
 		boolean bl2 = false;
 		boolean bl3 = true;
-		log.info("对比结果1 ==> {}",ObjectHandler.objectIsEmpty(bl));
-		log.info("对比结果2 ==> {}",ObjectHandler.objectIsEmpty(bl2));
-		log.info("对比结果3 ==> {}",ObjectHandler.objectIsEmpty(bl3));
+		log.info("对比结果1 ==> {}", ObjectHandler.objectIsEmpty(bl));
+		log.info("对比结果2 ==> {}", ObjectHandler.objectIsEmpty(bl2));
+		log.info("对比结果3 ==> {}", ObjectHandler.objectIsEmpty(bl3));
 	}
 
 	/**
-	 * boolean 类型数据的默认值,编译不通过
-	 * Boolean 类型数据的默认值,编译不通过
+	 * boolean 类型数据的默认值,编译不通过 Boolean 类型数据的默认值,编译不通过
 	 */
 	@Test
 	@SuppressWarnings("all")
 	void test28() {
 		boolean a;
 		Boolean b;
-		//log.info("默认的 boolean 类型的数据为 {}", a);
-		//log.info("默认的 boolean 类型的数据为 {}", b);
+		// log.info("默认的 boolean 类型的数据为 {}", a);
+		// log.info("默认的 boolean 类型的数据为 {}", b);
+	}
+
+	/**
+	 * jdk 8 使用 forEach 遍历 Map 集合
+	 */
+	@Test
+	void test29() {
+		Map<String, Object> map = new HashMap<>(16);
+		map.put("a", "valuea");
+		map.put("b", "valueb");
+		map.put("c", "valuec");
+		map.put("d", "valued");
+		map.put("e", "valuee");
+		map.forEach((key, value) -> log.info("{} --> {}", key, value));
+	}
+
+	/**
+	 * 获取 Integer 、Double、Float 数据类型的最大值和最小值
+	 */
+	@Test
+	void test30() {
+		log.info("Integer 的最大值为: {}", Integer.MAX_VALUE);
+		log.info("Integer 的最小值为: {}", Integer.MIN_VALUE);
+		log.info("Double 的最大值为: {}", Double.MAX_VALUE);
+		log.info("Double 的最小值为: {}", Double.MIN_VALUE);
+		log.info("Float 的最大值为: {}", Float.MAX_VALUE);
+		log.info("Float 的最小值为: {}", Float.MIN_VALUE);
+	}
+
+	/**
+	 * 测试数字判断方法 isNumber
+	 */
+	@Test
+	void test31() {
+		String num1 = "这是一个1234";
+		String num2 = "1234";
+		String num3 = "-1234";
+		String num4 = "12345AA";
+		String num5 = "+12345";
+		String num6 = "++12345";
+		String num7 = "--12345";
+		// false
+		log.info("对 num1 进行数字判断的结果为: {}", NumberHandler.isNumber(num1));
+		// true
+		log.info("对 num2 进行数字判断的结果为: {}", NumberHandler.isNumber(num2));
+		// true
+		log.info("对 num3 进行数字判断的结果为: {}", NumberHandler.isNumber(num3));
+		// false
+		log.info("对 num4 进行数字判断的结果为: {}", NumberHandler.isNumber(num4));
+		// true
+		log.info("对 num5 进行数字判断的结果为: {}", NumberHandler.isNumber(num5));
+		// false
+		log.info("对 num6 进行数字判断的结果为: {}", NumberHandler.isNumber(num6));
+		// false
+		log.info("对 num7 进行数字判断的结果为: {}", NumberHandler.isNumber(num7));
 	}
 }
