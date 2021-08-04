@@ -693,4 +693,16 @@ class DemoApplicationTests {
 		// false
 		log.info("对 num7 进行数字判断的结果为: {}", NumberHandler.isNumber(num7));
 	}
+
+	/**
+	 * String 数据类型和 Integer 数据类型的转换
+	 */
+	@Test
+	void test32() {
+		String numberStr = "1234567";
+		Integer number = 123456;
+		log.info("String ==> Integer 使用 Integer.parseInt(String str) 方法: {}" , Integer.parseInt(numberStr));
+		log.info("String ==> Integer 使用 Integer.parseInt(String str, int radix) 方法: {}" , Integer.parseInt(numberStr,16));
+		log.info("Integer ==> String 使用 String.valueOf(Object obj) 方法: {}" , String.valueOf(number));
+	}
 }

@@ -34,3 +34,4 @@ workspace.code-workspace
 */*/*/.factorypath
 */*/*/.project
 webcContainer
+.svn
