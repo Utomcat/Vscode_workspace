@@ -35,3 +35,4 @@ workspace.code-workspace
 */*/*/.project
 webcContainer
 .svn
+.idea

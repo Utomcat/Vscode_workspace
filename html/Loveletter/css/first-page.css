@@ -1,0 +1,35 @@
+/* 自定义第一页的 CSS 样式 */
+*{
+    margin: 0;
+    padding: 0;
+}
+.pageBox{
+    position: absolute;
+    top: 2%;
+    left: 1%;
+    width: 98%;
+    height: 96%;
+    background-color: #1976D2;
+}
+
+.contentBox{
+    width: 100%;
+    height: 100%;
+    background-color: aqua;
+}
+
+.content{
+    /*writing-mode: vertical-lr;*/
+}
+
+.acquaintanceTime{
+    text-decoration: none;
+}
+
+ul{
+    list-style: none;
+}
+ol{
+    list-style: none;
+}
+
