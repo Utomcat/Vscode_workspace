@@ -14,6 +14,7 @@ import java.math.RoundingMode;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.Base64.Decoder;
@@ -705,4 +706,84 @@ class DemoApplicationTests {
 		log.info("String ==> Integer 使用 Integer.parseInt(String str, int radix) 方法: {}" , Integer.parseInt(numberStr,16));
 		log.info("Integer ==> String 使用 String.valueOf(Object obj) 方法: {}" , String.valueOf(number));
 	}
+
+	@Test
+	void test33() {
+		SimpleDateFormat sdf =  new SimpleDateFormat("HH:mm");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		Date date = new Date();
+		String format1 = sdf.format(date);
+		try {
+			Date date1 = sdf.parse(format1);
+			log.info("format1 ==> {} , date1 ==> {}",format1, sdf2.format(date1));
+		} catch (Exception e) {
+			log.info("发生异常，异常信息: {}", e.getMessage());
+		}
+	}
+
+	@Test
+	void test34() {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		Date date = new Date();
+		String format1 = format.format(new Date(date.getTime() - 86400000));
+		try {
+			Date date1 = format.parse(format1 + " 22:00 ");
+			log.info("format1 ==> {} , date1 ==> {}", format1, sdf2.format(date1));
+		} catch (Exception e) {
+			log.info("发生异常，异常信息: {}", e.getMessage());
+		}
+	}
+
+	@Test
+	void test35() {
+		List<String> lists = new ArrayList<>(6);
+		lists.add("a");
+		lists.add("b");
+		lists.add("c");
+		lists.add("d");
+		lists.add("e");
+		StringBuilder builder = new StringBuilder("检测到");
+		if(lists.contains("a")){
+			builder.append("包含 a");
+		}
+		log.info(builder.toString());
+	}
+
+	@Test
+	void test36() {
+		String a =  String.valueOf("");
+		log.info("a 的值为 ==> {} , a 是否为空 {}", a, !StringUtils.hasText(a));
+	}
+
+	@Test
+	@SuppressWarnings("unchecked")
+	void test37() {
+		Map<String,Object> map = new HashMap<>();
+		map.put("a", 1);
+		map.put("b", 2);
+		map.put("c", 3);
+		map.put("d", 4);
+		String jsonStr = JSON.toJSONString(map);
+		log.info("当前json字符串为: {}",jsonStr);
+		Map<String,Object> result =  JSONObject.parseObject(jsonStr, HashMap.class);
+		log.info("当前 result 值为: {}", JSON.toJSONString(result));
+	}
+
+	@Test
+	void test38() {
+		List<String> list1 = new ArrayList<>(16);
+		List<String> list2 = new ArrayList<>(16);
+		list1.add("1");
+		list1.add("2");
+		list1.add("3");
+		list2.add("1");
+		list2.add("4");
+		list2.add("3");
+		list2.add("5");
+		list2.add("2");
+		list2.add("6");
+		
+	}
+
 }
