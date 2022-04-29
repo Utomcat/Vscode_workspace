@@ -786,4 +786,36 @@ class DemoApplicationTests {
 		
 	}
 
+	@Test
+	void test39() {
+		try{
+			long ms = System.currentTimeMillis();
+			Date date = new Date(ms);
+			Date date2 = new Date();
+			log.info("date before date2 ==> {}", date.before(date2) );
+		}catch(Exception exception){
+			log.error("异常信息: ", exception);
+		}
+		
+	}
+
+	/**
+	 * 判断时间对象的 compareTo 方法的返回值
+	 */
+	@Test
+	void test40(){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		Date now = new Date();
+		try {
+			Date before = sdf.parse("2022-04-28 16:24:54.6");
+			// A.compareTo(B) A 在 B 之前 返回值小于 0;
+			log.info("之前时间和当前时间做比较,其结果为: {}", before.compareTo(now));
+			// A.compareTo(B) A 在 B 之后 返回值大于 0;
+			log.info("当前时间和之前时间做比较,其结果为: {}", now.compareTo(before));
+			// A.compareTo(B) A 等于 B 返回值等于 0;
+			log.info("当前时间和当前时间做比较,其结果为: {}", now.compareTo(now));
+		} catch (Exception e) {
+			log.error("之前时间解析异常,异常信息为: {}", e.getMessage());
+		}
+	}
 }
