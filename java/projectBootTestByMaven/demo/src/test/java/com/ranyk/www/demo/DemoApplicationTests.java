@@ -29,6 +29,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.*;
 import com.ranyk.www.demo.enums.CheckHouAtOtherBizType;
+import com.ranyk.www.demo.model.CorpDTO;
 import com.ranyk.www.demo.model.Personel;
 import com.ranyk.www.demo.util.FileUtil;
 import com.ranyk.www.demo.util.NumberHandler;
@@ -803,7 +804,7 @@ class DemoApplicationTests {
 	 * 判断时间对象的 compareTo 方法的返回值
 	 */
 	@Test
-	void test40(){
+	void test40() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		Date now = new Date();
 		try {
@@ -817,5 +818,41 @@ class DemoApplicationTests {
 		} catch (Exception e) {
 			log.error("之前时间解析异常,异常信息为: {}", e.getMessage());
 		}
+	}
+
+	/**
+	 * 对象.getClass().getComponentType().getName() 调用结果验证
+	 */
+	@Test
+	void test41() {
+		long[] longs = new long[10];
+		String name = longs.getClass().getComponentType().getName();
+		log.info("longs getName() ==> {}", name);
+	}
+
+	/**
+	 * Collections.sort 方法执行结果测试
+	 */
+	@Test
+	void test42() {
+		CorpDTO corp1 = new CorpDTO(4);
+		CorpDTO corp2 = new CorpDTO(1);
+		CorpDTO corp3 = new CorpDTO(3);
+		CorpDTO corp4 = new CorpDTO(2);
+		List<CorpDTO> corps = new ArrayList<>();
+		corps.add(corp1);
+		corps.add(corp2);
+		corps.add(corp3);
+		corps.add(corp4);
+		log.info("排序前的 List 结果");
+		corps.forEach(corp -> log.info(corp.toString()));
+		Collections.sort(corps,new Comparator<CorpDTO>() {
+			@Override
+			public int compare(CorpDTO o1, CorpDTO o2) {
+				return o1.getSort().compareTo(o2.getSort());
+			}
+		});
+		log.info("排序后的 List 结果");
+		corps.forEach(corp -> log.info(corp.toString()));
 	}
 }
