@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 未使用解构时定义变量
+    let a = 1;
+    let b = 2;
+    let c = 3;
+    console.log("变量定义为 a: " + a + " , b: " + b + " , c: " + c);
+
+    // 使用解构是定义变量
+    let [d, e, f] = [1, 2, 3];
+
+    console.log("变量定义为 d: " + d + " , e: " + e + " , f: " + f);
+
+    // 解构数组
+    let arr = [4, 5, 6];
+    let [g, h, i] = arr;
+    console.log("变量定义为 g: " + g + " , h: " + h + " , i: " + i);
+
+    // 嵌套数组
+    let [foo, [[bar], baz]] = [1, [[2], 3]];
+    // 1    
+    console.log("foo " + foo);
+    // 2
+    console.log("bar " + bar);
+    // 3
+    console.log("baz " + baz);
+
+    let [, , third] = ["foo", "bar", "baz"];
+    // "baz"
+    console.log("third: " + third);
+
+    let [x1, , y1] = [1, 2, 3];
+    // 1
+    console.log("x1 " + x1);
+    // 3
+    console.log("y1 " + y1);
+
+    let [head, ...tail] = [1, 2, 3, 4];
+    // 1
+    console.log("head " + head);
+    // [2, 3, 4]
+    console.log("tail " + tail);
+
+    let [x, y, ...z] = ['a'];
+    // "a"
+    console.log("x " + x);
+    // undefined
+    console.log("y " + y);
+    // []
+    console.log("z " + z);
+
+    // 不完全解构
+    let [x2, y2] = [1, 2, 3];
+    // 1
+    console.log("x2 " + x2);
+    // 2
+    console.log("y2 " + y2);
+
+    let [a1, [b1], d1] = [1, [2, 3], 4];
+    // 1
+    console.log("a1 " + a1);
+    // 2
+    console.log("b1 " + b1);
+    // 4
+    console.log("d1 " + d1);
+
+    // 解构时等号右边结构为不可遍历对象
+    // 转为对象以后不具备 Iterator 接口
+    // let [foo1] = 1;
+    // 转为对象以后不具备 Iterator 接口
+    // let [foo2] = false;
+    // 转为对象以后不具备 Iterator 接口
+    // let [foo3] = NaN;
+    // 转为对象以后不具备 Iterator 接口
+    // let [foo4] = undefined;
+    // 转为对象以后不具备 Iterator 接口
+    // let [foo5] = null;
+    // 本身就不具备 Iterator 接口
+    // let [foo6] = {};
+
+    // 以下都会抛 Uncaught TypeError: 1 is not iterable 异常
+    // console.log("foo1 " + foo1);
+    // console.log("foo2 " + foo2);
+    // console.log("foo3 " + foo3);
+    // console.log("foo4 " + foo4);
+    // console.log("foo5 " + foo5);
+    // console.log("foo6 " + foo6);
+
+    // Set 集合解构
+    let [x3, y3, z3] = new Set(['a', 'b', 'c']);
+    // 打印 x3: a
+    console.log("x3: " + x3);
+    // 打印 y3: b
+    console.log("y3: " + y3);
+    // 打印 z3: c
+    console.log("z3: " + z3);
+
+    // 具有 Iterator 接口的解构
+    function* fibs() {
+        let a = 0;
+        let b = 1;
+        while (true) {
+            yield a;
+            [a, b] = [b, a + b];
+        }
+    }
+
+    let [first, second, third1, fourth, fifth, sixth] = fibs();
+    // 打印 sixth 5
+    console.log("sixth " + sixth);
+</script>
+
+</html>

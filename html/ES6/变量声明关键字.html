@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>var 、let 和 const 变量声明</h1>
+    <p>
+        1. var 声明的变量在任何地方都可使用(即存在越域情况), let 声明的变量只能在声明的块内使用不能越域<br>
+        2. var 声明的变量可以声明多次, let 声明的变量只能声明一次<br>
+        3. var 声明的变量会提升, let 声明的变量不存在提升<br>
+        4. const 与 let 相似,但是 const 声明的变量一旦声明则不再能改变,且声明后必须初始化(即声明的为常量)<br>
+    </p>
+</body>
+<script>
+    // 第一点验证
+    {
+        var a = 1;
+        let b = 2;
+    }
+    // 此处打印  a : 1
+    console.log(" a : " + a)
+    // 报 Uncaught ReferenceError: b is not defined 异常
+    // console.log(" b : " + b)
+
+    // 第二点验证
+    var c = 3;
+    var c = 4;
+    let d = 5;
+    // 此处编译不通过,报 Cannot redeclare block-scoped variable 'd'. (无法重新声明块范围的变量“d”。)
+    // let d = 5;
+
+    // 第三点验证
+    // 此处打印 声明前使用 e : undefined
+    console.log("声明前使用 e : " + e)
+    // 此处会抛出 Uncaught ReferenceError: Cannot access 'f' before initialization
+    // console.log("声明前使用 f : " + f)
+    var e = 6;
+    let f = 7;
+
+    // 第四点验证
+    const g = 8;
+    g = 9;
+    // 此处报异常 Uncaught TypeError: Assignment to constant variable.
+    // console.log("改变变量 g 的值: " + g);
+</script>
+
+</html>

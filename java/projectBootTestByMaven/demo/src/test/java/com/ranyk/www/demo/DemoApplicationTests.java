@@ -29,6 +29,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.*;
 import com.ranyk.www.demo.enums.CheckHouAtOtherBizType;
+import com.ranyk.www.demo.model.AccInterestInfo;
+import com.ranyk.www.demo.model.AccTypeKeyBean;
 import com.ranyk.www.demo.model.CorpDTO;
 import com.ranyk.www.demo.model.Personel;
 import com.ranyk.www.demo.util.FileUtil;
@@ -854,5 +856,43 @@ class DemoApplicationTests {
 		});
 		log.info("排序后的 List 结果");
 		corps.forEach(corp -> log.info(corp.toString()));
+	}
+
+	@Test
+	void test43() {
+		AccTypeKeyBean accKey = new AccTypeKeyBean("1","1.1","2");
+		AccInterestInfo accInfo = new AccInterestInfo(accKey, new HashMap<>(3), new ArrayList<>(4));
+		log.info("变更前 accInfo :  {}", accInfo.toString());
+		handleMethod(accInfo);
+		log.info("变更后 accInfo :  {}", accInfo.toString());
+	}
+
+	/**
+	 * 处理测试方法
+	 */
+	private void handleMethod(AccInterestInfo accInfo) {
+		accInfo.getAccTypeKeyBean().setCurId("2.2");
+		accInfo.getAttributeMap().put("key", "value");
+		accInfo.getAttributeList().add("e");
+	}
+
+	@Test
+	void test44() {
+		String nullStr = null;
+		String nulStr = "null";
+		String instDay = "21";
+		if(instDay.equals(nullStr)){
+			log.info("nullStr == instDay");
+		}
+		if(nulStr.equals(instDay)){
+			log.info("nullStr == instDay");
+		}
+
+		Integer a = Integer.valueOf(nullStr == null ? "0" : nullStr);
+		Integer b = Integer.valueOf(nulStr == "null" ? "0" : nulStr);
+		Integer c = Integer.valueOf(instDay);
+
+		log.info("a > c = {} , b > c = {}", a>c, b>c);
+
 	}
 }
