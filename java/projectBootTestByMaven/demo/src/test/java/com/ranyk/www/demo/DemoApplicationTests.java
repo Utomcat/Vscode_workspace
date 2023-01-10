@@ -895,4 +895,14 @@ class DemoApplicationTests {
 		log.info("a > c = {} , b > c = {}", a>c, b>c);
 
 	}
+
+	@Test
+	void test45(){
+		BigDecimal a = new BigDecimal(15);
+		BigDecimal b = new BigDecimal(10);
+		BigDecimal c = new BigDecimal(12);
+
+		BigDecimal balance =  (a.subtract(b).multiply(c));
+		log.info("计算结果为 {}",  balance);
+	}
 }
