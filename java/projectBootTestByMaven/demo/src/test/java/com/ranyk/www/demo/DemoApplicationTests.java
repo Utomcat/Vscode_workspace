@@ -896,6 +896,10 @@ class DemoApplicationTests {
 
 	}
 
+	/**
+	 * 对 BigDecimal 类型的数据进行 subtract 和 multiply 计算的先后判定测试,
+	 * 从左到右依次进行计算
+	 */
 	@Test
 	void test45(){
 		BigDecimal a = new BigDecimal(15);
@@ -904,5 +908,21 @@ class DemoApplicationTests {
 
 		BigDecimal balance =  (a.subtract(b).multiply(c));
 		log.info("计算结果为 {}",  balance);
+	}
+
+	/**
+	 * 对 String 类型数据,进行 getBytes(String charsetName) 再进行 new String(byte[] bytes,String charsetName) 方法进行测试,
+	 * 结果为前后两者的字符集不一样的情况下会导致中文乱码
+	 */
+	@Test
+	void test46(){
+		String str = "这是一个 StringBuilder 初始化";
+		try{
+			String strb = new String(str.getBytes("gb2312"),"UTF-8");
+			log.info("转换完后新的字符串 strb ==> {}", strb);
+		}catch(Exception exception){
+			log.error("发生异常!");
+			exception.printStackTrace();	
+		}	
 	}
 }
