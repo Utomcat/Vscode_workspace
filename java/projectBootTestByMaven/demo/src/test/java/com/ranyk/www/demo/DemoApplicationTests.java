@@ -12,6 +12,7 @@ import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.HttpURLConnection;
+import java.net.Socket;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.SimpleDateFormat;
@@ -705,20 +706,21 @@ class DemoApplicationTests {
 	void test32() {
 		String numberStr = "1234567";
 		Integer number = 123456;
-		log.info("String ==> Integer 使用 Integer.parseInt(String str) 方法: {}" , Integer.parseInt(numberStr));
-		log.info("String ==> Integer 使用 Integer.parseInt(String str, int radix) 方法: {}" , Integer.parseInt(numberStr,16));
-		log.info("Integer ==> String 使用 String.valueOf(Object obj) 方法: {}" , String.valueOf(number));
+		log.info("String ==> Integer 使用 Integer.parseInt(String str) 方法: {}", Integer.parseInt(numberStr));
+		log.info("String ==> Integer 使用 Integer.parseInt(String str, int radix) 方法: {}",
+				Integer.parseInt(numberStr, 16));
+		log.info("Integer ==> String 使用 String.valueOf(Object obj) 方法: {}", String.valueOf(number));
 	}
 
 	@Test
 	void test33() {
-		SimpleDateFormat sdf =  new SimpleDateFormat("HH:mm");
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
 		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Date date = new Date();
 		String format1 = sdf.format(date);
 		try {
 			Date date1 = sdf.parse(format1);
-			log.info("format1 ==> {} , date1 ==> {}",format1, sdf2.format(date1));
+			log.info("format1 ==> {} , date1 ==> {}", format1, sdf2.format(date1));
 		} catch (Exception e) {
 			log.info("发生异常，异常信息: {}", e.getMessage());
 		}
@@ -747,7 +749,7 @@ class DemoApplicationTests {
 		lists.add("d");
 		lists.add("e");
 		StringBuilder builder = new StringBuilder("检测到");
-		if(lists.contains("a")){
+		if (lists.contains("a")) {
 			builder.append("包含 a");
 		}
 		log.info(builder.toString());
@@ -755,21 +757,21 @@ class DemoApplicationTests {
 
 	@Test
 	void test36() {
-		String a =  String.valueOf("");
+		String a = String.valueOf("");
 		log.info("a 的值为 ==> {} , a 是否为空 {}", a, !StringUtils.hasText(a));
 	}
 
 	@Test
 	@SuppressWarnings("unchecked")
 	void test37() {
-		Map<String,Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 		map.put("a", 1);
 		map.put("b", 2);
 		map.put("c", 3);
 		map.put("d", 4);
 		String jsonStr = JSON.toJSONString(map);
-		log.info("当前json字符串为: {}",jsonStr);
-		Map<String,Object> result =  JSONObject.parseObject(jsonStr, HashMap.class);
+		log.info("当前json字符串为: {}", jsonStr);
+		Map<String, Object> result = JSONObject.parseObject(jsonStr, HashMap.class);
 		log.info("当前 result 值为: {}", JSON.toJSONString(result));
 	}
 
@@ -786,20 +788,20 @@ class DemoApplicationTests {
 		list2.add("5");
 		list2.add("2");
 		list2.add("6");
-		
+
 	}
 
 	@Test
 	void test39() {
-		try{
+		try {
 			long ms = System.currentTimeMillis();
 			Date date = new Date(ms);
 			Date date2 = new Date();
-			log.info("date before date2 ==> {}", date.before(date2) );
-		}catch(Exception exception){
+			log.info("date before date2 ==> {}", date.before(date2));
+		} catch (Exception exception) {
 			log.error("异常信息: ", exception);
 		}
-		
+
 	}
 
 	/**
@@ -848,7 +850,7 @@ class DemoApplicationTests {
 		corps.add(corp4);
 		log.info("排序前的 List 结果");
 		corps.forEach(corp -> log.info(corp.toString()));
-		Collections.sort(corps,new Comparator<CorpDTO>() {
+		Collections.sort(corps, new Comparator<CorpDTO>() {
 			@Override
 			public int compare(CorpDTO o1, CorpDTO o2) {
 				return o1.getSort().compareTo(o2.getSort());
@@ -860,7 +862,7 @@ class DemoApplicationTests {
 
 	@Test
 	void test43() {
-		AccTypeKeyBean accKey = new AccTypeKeyBean("1","1.1","2");
+		AccTypeKeyBean accKey = new AccTypeKeyBean("1", "1.1", "2");
 		AccInterestInfo accInfo = new AccInterestInfo(accKey, new HashMap<>(3), new ArrayList<>(4));
 		log.info("变更前 accInfo :  {}", accInfo.toString());
 		handleMethod(accInfo);
@@ -881,10 +883,10 @@ class DemoApplicationTests {
 		String nullStr = null;
 		String nulStr = "null";
 		String instDay = "21";
-		if(instDay.equals(nullStr)){
+		if (instDay.equals(nullStr)) {
 			log.info("nullStr == instDay");
 		}
-		if(nulStr.equals(instDay)){
+		if (nulStr.equals(instDay)) {
 			log.info("nullStr == instDay");
 		}
 
@@ -892,7 +894,7 @@ class DemoApplicationTests {
 		Integer b = Integer.valueOf(nulStr == "null" ? "0" : nulStr);
 		Integer c = Integer.valueOf(instDay);
 
-		log.info("a > c = {} , b > c = {}", a>c, b>c);
+		log.info("a > c = {} , b > c = {}", a > c, b > c);
 
 	}
 
@@ -901,28 +903,94 @@ class DemoApplicationTests {
 	 * 从左到右依次进行计算
 	 */
 	@Test
-	void test45(){
+	void test45() {
 		BigDecimal a = new BigDecimal(15);
 		BigDecimal b = new BigDecimal(10);
 		BigDecimal c = new BigDecimal(12);
 
-		BigDecimal balance =  (a.subtract(b).multiply(c));
-		log.info("计算结果为 {}",  balance);
+		BigDecimal balance = (a.subtract(b).multiply(c));
+		log.info("计算结果为 {}", balance);
 	}
 
 	/**
-	 * 对 String 类型数据,进行 getBytes(String charsetName) 再进行 new String(byte[] bytes,String charsetName) 方法进行测试,
+	 * 对 String 类型数据,进行 getBytes(String charsetName) 再进行 new String(byte[]
+	 * bytes,String charsetName) 方法进行测试,
 	 * 结果为前后两者的字符集不一样的情况下会导致中文乱码
 	 */
 	@Test
-	void test46(){
+	void test46() {
 		String str = "这是一个 StringBuilder 初始化";
-		try{
-			String strb = new String(str.getBytes("gb2312"),"UTF-8");
+		try {
+			String strb = new String(str.getBytes("gb2312"), "UTF-8");
 			log.info("转换完后新的字符串 strb ==> {}", strb);
-		}catch(Exception exception){
+		} catch (Exception exception) {
 			log.error("发生异常!");
-			exception.printStackTrace();	
-		}	
+			exception.printStackTrace();
+		}
+	}
+
+	/**
+	 * 对 String 类型数据,进行 getBytes(String charsetName) 再进行 new String(byte[]
+	 * bytes,String charsetName) 方法进行测试,
+	 * 结果为前后两者的字符集不一样的情况下会导致中文乱码
+	 */
+	@Test
+	void test47() {
+		try {
+			String chartFomart = "UTF-8";
+			String signData = "10990120000392952|泸州产业发展投资集团有限公司|10990120000393066|泸州白酒产业发展投资集团有限公司|1.03";
+			StringBuilder sb = new StringBuilder();
+			sb.append("<?xml version='1.0' encoding='UTF-8'?>\r\n");
+			sb.append("<msg>\r\n");
+			sb.append("<msg_head>\r\n");
+			sb.append("<msg_type>0</msg_type>\r\n");
+			sb.append("<msg_id>1005</msg_id>\r\n");
+			sb.append("<msg_sn>0</msg_sn>\r\n");
+			sb.append("<version>1</version>\r\n");
+			sb.append("</msg_head>\r\n");
+			sb.append("<msg_body>\r\n");
+			sb.append("<origin_data_len>");
+			sb.append(signData.getBytes(chartFomart).length);
+			sb.append("</origin_data_len>\r\n");
+			sb.append("<origin_data>");
+			String gbks = new String(signData.getBytes(chartFomart), chartFomart);
+			sb.append(gbks);
+			sb.append("</origin_data>\r\n");
+			sb.append("</msg_body>\r\n");
+			sb.append("</msg>\r\n");
+
+			String data = new String(sb.toString().getBytes(chartFomart), chartFomart);
+			int length = data.getBytes(chartFomart).length;
+			byte[] byf = new byte[length + 5];
+			String lenValue = String.valueOf(length);
+			System.arraycopy(data.getBytes(chartFomart), 0, byf, 5, length);
+			log.info("操作前 ==> {}", new String(byf));
+			for (int i = 0; i < 5; i++) {
+				byf[i] = '0';
+			}
+			int idx = 0;
+			for (int i = 5 - lenValue.length(); i < 5; i++) {
+				byf[i] = (byte) lenValue.charAt(idx++);
+			}
+			log.info("操作后 ==> {}", new String(byf));
+		} catch (Exception exception) {
+			log.error("发生异常,异常信息为: {}", exception.getMessage());
+		}
+
+	}
+
+	@Test
+	void test48() {
+		try {
+			String chartFomart = "UTF-8";
+			String signData = new String("10990120000392952|泸州产业发展投资集团有限公司|10990120000393066|泸州白酒产业发展投资集团有限公司|1.03".getBytes(),"gbk");
+			String utf8Signata = new String(signData.getBytes(chartFomart),chartFomart);
+			log.info("signData 是否是UTF-8格式数据: {}", signData.equals(utf8Signata));
+			Socket socket = new  Socket("",8801);
+			socket.shutdownOutput();
+		} catch (Exception exception) {
+			log.error("发生异常,异常信息为: {}", exception.getMessage());
+		}
+
 	}
 }
