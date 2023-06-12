@@ -34,6 +34,7 @@ import com.ranyk.www.demo.model.AccInterestInfo;
 import com.ranyk.www.demo.model.AccTypeKeyBean;
 import com.ranyk.www.demo.model.CorpDTO;
 import com.ranyk.www.demo.model.Personel;
+import com.ranyk.www.demo.util.FileTestUtil;
 import com.ranyk.www.demo.util.FileUtil;
 import com.ranyk.www.demo.util.NumberHandler;
 import com.ranyk.www.demo.util.ObjectHandler;
@@ -983,10 +984,11 @@ class DemoApplicationTests {
 	void test48() {
 		try {
 			String chartFomart = "UTF-8";
-			String signData = new String("10990120000392952|泸州产业发展投资集团有限公司|10990120000393066|泸州白酒产业发展投资集团有限公司|1.03".getBytes(),"gbk");
-			String utf8Signata = new String(signData.getBytes(chartFomart),chartFomart);
+			String signData = new String(
+					"10990120000392952|泸州产业发展投资集团有限公司|10990120000393066|泸州白酒产业发展投资集团有限公司|1.03".getBytes(), "gbk");
+			String utf8Signata = new String(signData.getBytes(chartFomart), chartFomart);
 			log.info("signData 是否是UTF-8格式数据: {}", signData.equals(utf8Signata));
-			Socket socket = new  Socket("",8801);
+			Socket socket = new Socket("", 8801);
 			socket.shutdownOutput();
 		} catch (Exception exception) {
 			log.error("发生异常,异常信息为: {}", exception.getMessage());
@@ -998,27 +1000,84 @@ class DemoApplicationTests {
 	 * 切割指定字符串
 	 */
 	@Test
-    void test49() {
-        String recoverData = "000000#6#" +
-                "银企测试有限公司|10250000003856927|0250|4.00|跨行对私转账|系统间往来-小额支付往来|7025000130020203|0250|202306010250896314|2023-06-01|896314|1||#" +
-                "银企测试有限公司|10250000003856927|0250|3.00|跨行对公转账|系统间往来-小额支付往来|7025000130020203|0250|202306010250378620|2023-06-01|378620|1||#" +
-                "银企测试有限公司|10250000003856927|0250|2.00|同行对私转账|黑米粒|10250000003189779|0250|202306010250892362|2023-06-01|892362|1||#" +
-                "银企测试有限公司|10250000003856927|0250|1.00|同行对公转账测试|银企直联收款|10250000003192691|0250|202306010250888940|2023-06-01|888940|1||#" +
-                "银企测试有限公司|10250000003856927|0250|1.00|||||202306010250896314|2023-06-01|896314|1||#" +
-                "银企测试有限公司|10250000003856927|0250|1.00|||||202306010250378620|2023-06-01|378620|1||#" +
-                "@@@@";
-        String[] recoverDataArray = recoverData.split("#");
-        String head = recoverDataArray[0] + "#" + recoverDataArray[1] + "#";
-        String data = recoverData.substring(head.length(), recoverData.indexOf("#@@@@"));
-        String[] dataArray = data.split("#");
-        for (String item : dataArray) {
-            String[] element = item.split("[|]");
-            for (String s : element) {
-                log.info("本次循环的数据为 => {}", s);
-            }
+	void test49() {
+		String recoverData = "000000#6#" +
+				"银企测试有限公司|10250000003856927|0250|4.00|跨行对私转账|系统间往来-小额支付往来|7025000130020203|0250|202306010250896314|2023-06-01|896314|1||#"
+				+
+				"银企测试有限公司|10250000003856927|0250|3.00|跨行对公转账|系统间往来-小额支付往来|7025000130020203|0250|202306010250378620|2023-06-01|378620|1||#"
+				+
+				"银企测试有限公司|10250000003856927|0250|2.00|同行对私转账|黑米粒|10250000003189779|0250|202306010250892362|2023-06-01|892362|1||#"
+				+
+				"银企测试有限公司|10250000003856927|0250|1.00|同行对公转账测试|银企直联收款|10250000003192691|0250|202306010250888940|2023-06-01|888940|1||#"
+				+
+				"银企测试有限公司|10250000003856927|0250|1.00|||||202306010250896314|2023-06-01|896314|1||#" +
+				"银企测试有限公司|10250000003856927|0250|1.00|||||202306010250378620|2023-06-01|378620|1||#" +
+				"@@@@";
+		String[] recoverDataArray = recoverData.split("#");
+		String head = recoverDataArray[0] + "#" + recoverDataArray[1] + "#";
+		String data = recoverData.substring(head.length(), recoverData.indexOf("#@@@@"));
+		String[] dataArray = data.split("#");
+		for (String item : dataArray) {
+			String[] element = item.split("[|]");
+			for (String s : element) {
+				log.info("本次循环的数据为 => {}", s);
+			}
 
-        }
+		}
 
+	}
 
-    }
+	/**
+	 * 文件获取操作测试
+	 */
+	@Test
+	void test50() {
+		String path = "C:\\Users\\ranyi\\Desktop\\051001800211-11596119.pdf";
+		byte[] fileBytes = FileTestUtil.getContent(new File(path));
+		String fileStr = null;
+		try {
+			fileStr = Base64.getEncoder().encodeToString(fileBytes);
+		} catch (Exception e) {
+			log.error("创建文件内容字符串时发生异常,异常为: {}", e.getMessage());
+			return;
+		}
+		byte[] execlFile = null;
+		try {
+			execlFile = Base64.getDecoder().decode(fileStr.toString().replace("\r\n", "").getBytes("gb2312"));
+		} catch (Exception e) {
+			log.error("decode 时发生异常,异常为: {}", e.getMessage());
+			return;
+		}
+		File file = new File("C:\\Users\\ranyi\\Desktop\\20230612-1435.pdf");
+		ByteArrayInputStream bais = new ByteArrayInputStream(execlFile);
+		FileOutputStream fos = null;
+		try {
+			fos = new FileOutputStream(file);
+			byte[] temp = new byte[1024];
+			while (true) {
+				int size;
+				if ((size = bais.read(temp)) == -1) {
+					break;
+				}
+				fos.write(temp, 0, size);
+			}
+		} catch (Exception e) {
+			log.info("获取文件输出流失败,异常信息为: {}", e.getMessage());
+		} finally {
+			try {
+				bais.close();
+			} catch (Exception e) {
+				log.info("关闭 ByteArrayInputStream 流失败,失败异常为: {}", e.getMessage());
+			}
+			try {
+				if (fos != null) {
+					fos.close();
+				}
+			} catch (Exception e) {
+				log.info("关闭 FileOutputStream 流失败,失败异常为: {}", e.getMessage());
+			}
+
+		}
+
+	}
 }
